@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#142c50">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Милана — 10 заданий по Present и Past</title>
+<style>
+:root{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#162740;background:#f3f6fa;font-size:17px;line-height:1.5}
+*{box-sizing:border-box}body{margin:0;padding-bottom:calc(30px + env(safe-area-inset-bottom,0px))}main{width:min(760px,100%);margin:0 auto;padding:16px 14px 30px}
+.hero{background:linear-gradient(125deg,#142c50,#315d90);color:#fff;border-radius:22px;padding:24px 21px;box-shadow:0 10px 28px rgba(13,46,84,.13)}
+.badge{display:inline-block;background:rgba(255,255,255,.16);font-size:.78rem;font-weight:750;border-radius:99px;padding:5px 11px;letter-spacing:.02em}.hero h1{font-size:clamp(1.45rem,6vw,2rem);line-height:1.18;margin:14px 0 9px}.hero p{margin:0;color:#e4edf8;font-size:.94rem}
+.panel{background:#fff;border:1px solid #dbe3ee;border-radius:19px;margin:15px 0;padding:18px;box-shadow:0 2px 9px rgba(28,51,76,.035)}h2{font-size:1.17rem;line-height:1.25;margin:0 0 11px}h3{font-size:1.03rem;margin:0 0 8px}.small{font-size:.86rem;color:#617087;margin:5px 0}.theory p{margin:7px 0}.theory details{background:#f4f7fb;border:1px solid #e2eaf4;padding:13px;border-radius:13px;margin:10px 0}.theory summary{font-weight:700;cursor:pointer}.theory details p{font-size:.91rem}.example{margin:8px 0 0;background:#fff;padding:10px 12px;border-radius:9px;font-size:.9rem;line-height:1.5}
+.progress-title{display:flex;align-items:center;justify-content:space-between;gap:12px;font-weight:700}.progress-track{height:8px;border-radius:100px;background:#e6ebf2;overflow:hidden;margin-top:12px}.progress-bar{width:0%;height:100%;background:#2d8c71;transition:width .2s}
+.question .num{display:inline-grid;place-items:center;width:36px;height:36px;border-radius:11px;background:#e6effb;color:#174478;font-weight:800;flex-shrink:0}.qheading{display:flex;gap:12px;align-items:flex-start}.qtext{font-weight:720;font-size:1.06rem;line-height:1.42;margin:4px 0 0}.vocab{margin:11px 0 11px;padding:8px 11px;background:#f3f7fc;border-left:3px solid #6b9ac6;border-radius:6px;font-size:.85rem;color:#48627c}.question label{display:block;color:#425873;font-size:.83rem;font-weight:700;margin:12px 0 5px}.question textarea{display:block;width:100%;min-height:91px;resize:vertical;border:1.5px solid #b9c7d7;border-radius:12px;padding:13px;color:#142c50;font:inherit;font-size:16px;background:#fff;line-height:1.45;outline:none}.question textarea:focus{border-color:#2874b7;box-shadow:0 0 0 3px #cfe4fa}.question textarea:focus-visible{outline:none}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}button{font:inherit;font-size:.94rem;line-height:1.35;padding:15px 11px;border:0;border-radius:13px;font-weight:750;min-height:52px;cursor:pointer;touch-action:manipulation}.primary{background:#193657;color:#fff}.secondary{background:#e8eef6;color:#234b79}.wide{grid-column:1/-1}.status{min-height:24px;color:#296d57;font-size:.85rem;margin-top:9px}#output{display:none;width:100%;min-height:170px;border:1px solid #bcc9d8;border-radius:10px;font:14px/1.4 monospace;padding:12px;color:#243653;background:#f8fbff;margin-top:12px}footer{text-align:center;color:#68758a;font-size:.75rem;margin-top:20px}a{color:#295e92}
+@media(max-width:460px){main{padding:10px 10px 25px}.hero{padding:20px 16px;border-radius:18px}.panel{padding:15px;border-radius:17px}.actions{grid-template-columns:1fr 1fr}button{font-size:.9rem;padding:13px 7px}}
+@media(prefers-reduced-motion:reduce){.progress-bar{transition:none}}
+</style>
+</head>
+<body>
+<main>
+  <header class="hero">
+    <span class="badge">10 заданий · Present + Past</span>
+    <h1>Милана, работа над ошибками</h1>
+    <p>Переведи предложения на английский. Времена перемешаны, слова простые. Ответы сохраняются на этом устройстве автоматически.</p>
+  </header>
+  <section class="panel theory" aria-labelledby="theory-title">
+    <h2 id="theory-title">Коротко повтори перед тестом</h2>
+    <p class="small">Раскрой правила, повтори их, а затем закрой этот блок и решай самостоятельно.</p>
+    <details><summary>1. Did / didn't и does / doesn't</summary><p>После <strong>did, didn't, does, doesn't</strong> основной глагол стоит в начальной форме.</p><div class="example">✅ She <strong>didn't go</strong> yesterday.<br>❌ She didn't went.<br>✅ <strong>Does</strong> he <strong>drink</strong> tea?</div></details>
+    <details><summary>2. Continuous — действие в процессе</summary><p>Настоящее: <strong>am/is/are + V-ing</strong>. Прошедшее: <strong>was/were + V-ing</strong>.</p><div class="example">I <strong>am reading</strong> now.<br>I <strong>was reading</strong> at 7 yesterday.</div></details>
+    <details><summary>3. Perfect — результат до какого-то момента</summary><p><strong>have/has + V3</strong> — к настоящему; <strong>had + V3</strong> — к моменту в прошлом.</p><div class="example">I <strong>have eaten</strong>. — Я уже поел.<br>I <strong>had eaten</strong> before he came. — Я поел ещё до его прихода.</div></details>
+    <details><summary>4. Perfect Continuous — как долго длится действие</summary><p><strong>have/has been + V-ing</strong> — до сейчас; <strong>had been + V-ing</strong> — до момента в прошлом. Для периода времени используем <strong>for</strong>.</p><div class="example">I <strong>have been waiting for</strong> an hour.<br>I <strong>had been waiting for</strong> an hour when the bus came.</div></details>
+    <details><summary>5. Другие частые ошибки</summary><p><strong>take photos of</strong> — фотографировать кого-то; <strong>look at</strong> — смотреть на; <strong>how the story ends</strong> — чем заканчивается история. В вопросе порядок такой: <strong>What time does the lesson start?</strong></p></details>
+  </section>
+  <section class="panel" aria-label="Прогресс">
+    <div class="progress-title"><span>Прогресс</span><span id="progress-label" aria-live="polite">0 из 10</span></div>
+    <div class="progress-track"><div id="progress-bar" class="progress-bar"></div></div>
+  </section>
+  <section aria-labelledby="questions-title">
+    <h2 id="questions-title">Переведи на английский</h2>
+    <p class="small">Каждый перевод впиши в своё поле. Если слово может быть незнакомым, рядом дан перевод.</p>
+
+    <article class="panel question"><div class="qheading"><span class="num">1</span><p class="qtext">Вчера моя сестра не ходила в школу. Она осталась дома.</p></div><p class="vocab">осталась дома — <b>stayed at home</b></p><label for="a1">Твой перевод</label><textarea id="a1" placeholder="Напиши перевод…" spellcheck="false" autocomplete="off"></textarea></article>
+    <article class="panel question"><div class="qheading"><span class="num">2</span><p class="qtext">Во сколько твой брат обычно приходит домой по понедельникам?</p></div><p class="vocab">обычно — <b>usually</b></p><label for="a2">Твой перевод</label><textarea id="a2" placeholder="Напиши перевод…" spellcheck="false" autocomplete="off"></textarea></article>
+    <article class="panel question"><div class="qheading"><span class="num">3</span><p class="qtext">Моя мама всегда пьёт чай по утрам. Она не любит кофе.</p></div><label for="a3">Твой перевод</label><textarea id="a3" placeholder="Напиши перевод…" spellcheck="false" autocomplete="off"></textarea></article>
+    <article class="panel question"><div class="qheading"><span class="num">4</span><p class="qtext">Смотри! Папа сейчас фотографирует нашу кошку.</p></div><p class="vocab">фотографировать — <b>take photos of</b></p><label for="a4">Твой перевод</label><textarea id="a4" placeholder="Напиши перевод…" spellcheck="false" autocomplete="off"></textarea></article>
+    <article class="panel question"><div class="qheading"><span class="num">5</span><p class="qtext">Когда я пришёл домой, мой брат уже поел.</p></div><label for="a5">Твой перевод</label><textarea id="a5" placeholder="Напиши перевод…" spellcheck="false" autocomplete="off"></textarea></article>
+    <article class="panel question"><div class="qheading"><span class="num">6</span><p class="qtext">Когда мама пришла домой, я уже два часа делал домашнюю работу. Я всё ещё её делал.</p></div><label for="a6">Твой перевод</label><textarea id="a6" placeholder="Напиши перевод…" spellcheck="false" autocomplete="off"></textarea></article>
+    <article class="panel question"><div class="qheading"><span class="num">7</span><p class="qtext">Ты смотрел этот фильм вчера вечером?</p></div><label for="a7">Твой перевод</label><textarea id="a7" placeholder="Напиши перевод…" spellcheck="false" autocomplete="off"></textarea></article>
+    <article class="panel question"><div class="qheading"><span class="num">8</span><p class="qtext">Я не мог найти свой телефон, потому что забыл его в школе раньше в тот день.</p></div><p class="vocab">найти — <b>find (found, found)</b> · забывать — <b>forget (forgot, forgotten)</b></p><label for="a8">Твой перевод</label><textarea id="a8" placeholder="Напиши перевод…" spellcheck="false" autocomplete="off"></textarea></article>
+    <article class="panel question"><div class="qheading"><span class="num">9</span><p class="qtext">Моя сестра учится играть на гитаре уже три месяца. Она всё ещё учится.</p></div><p class="vocab">учиться играть — <b>learn to play</b></p><label for="a9">Твой перевод</label><textarea id="a9" placeholder="Напиши перевод…" spellcheck="false" autocomplete="off"></textarea></article>
+    <article class="panel question"><div class="qheading"><span class="num">10</span><p class="qtext">Я ещё не прочитал последнюю страницу книги, поэтому не знаю, чем заканчивается история.</p></div><p class="vocab">последняя страница — <b>the last page</b> · история — <b>story</b></p><label for="a10">Твой перевод</label><textarea id="a10" placeholder="Напиши перевод…" spellcheck="false" autocomplete="off"></textarea></article>
+  </section>
+  <section class="panel" aria-labelledby="submit-title"><h2 id="submit-title">Отправить ответы</h2>
+    <p class="small">Ключей здесь нет. После выполнения нажми «Поделиться», чтобы отправить ответы преподавателю в Telegram или WhatsApp. Можно также скопировать текст или скачать файл.</p>
+    <div class="actions">
+      <button class="primary wide" type="button" id="share">📤 Поделиться ответами</button>
+      <button class="secondary" type="button" id="copy">Скопировать</button>
+      <button class="secondary" type="button" id="download">Скачать .txt</button>
+      <button class="secondary wide" type="button" id="show">Показать ответы текстом</button>
+    </div>
+    <div class="status" id="status" role="status" aria-live="polite"></div>
+    <textarea id="output" readonly aria-label="Все ответы одним текстом"></textarea>
+  </section>
+  <footer><a href="../">← Предыдущий тест на 35 заданий</a><br>Ответы хранятся только в браузере на этом устройстве, пока ты не поделишься ими.</footer>
+</main>
+<script>
+(function(){'use strict';
+const inputs=Array.from({length:10},(_,i)=>document.getElementById('a'+(i+1)));
+const key='milana-10-mistakes-v1';
+function setStatus(s){document.getElementById('status').textContent=s;}
+try{const saved=JSON.parse(localStorage.getItem(key)||'[]');if(Array.isArray(saved))inputs.forEach((el,i)=>{if(typeof saved[i]==='string')el.value=saved[i];});}catch(e){}
+function update(){const answers=inputs.map(x=>x.value);const count=answers.filter(x=>x.trim()).length;document.getElementById('progress-label').textContent=count+' из 10';document.getElementById('progress-bar').style.width=(count*10)+'%';try{localStorage.setItem(key,JSON.stringify(answers));}catch(e){setStatus('Автосохранение недоступно: можно скопировать ответы кнопкой ниже.');}}
+inputs.forEach(x=>x.addEventListener('input',update));update();
+function report(){const d=new Date();return 'МИЛАНА — 10 ЗАДАНИЙ НА ОШИБКИ (PRESENT + PAST)\nДата: '+d.toLocaleString('ru-RU')+'\n\n'+inputs.map((el,i)=>(i+1)+'. '+(el.value.trim()||'[нет ответа]')).join('\n\n');}
+function showText(){const out=document.getElementById('output');out.value=report();out.style.display='block';out.focus();out.select();setStatus('Ответы показаны ниже — их можно скопировать вручную.');}
+async function copy(){const s=report();try{if(navigator.clipboard && window.isSecureContext){await navigator.clipboard.writeText(s);setStatus('Все ответы скопированы. Вставь их в чат преподавателю.');return;}}catch(e){}showText();try{const ok=document.execCommand('copy');if(ok){setStatus('Ответы скопированы. Вставь их в чат преподавателю.');return;}}catch(e){}setStatus('Скопируй выделенный текст ниже обычным способом.');}
+function download(){const file=new Blob([report()],{type:'text/plain;charset=utf-8'});const a=document.createElement('a');const url=URL.createObjectURL(file);a.href=url;a.download='milana_answers_10.txt';document.body.appendChild(a);a.click();a.remove();setStatus('Файл с ответами сохранён (или открыт в меню загрузки).');setTimeout(()=>URL.revokeObjectURL(url),15000);}
+async function share(){const s=report();if(navigator.share){try{await navigator.share({title:'Ответы Миланы — 10 заданий',text:s});setStatus('Меню отправки закрыто.');return;}catch(e){if(e && e.name==='AbortError'){setStatus('Отправка отменена.');return;}}}await copy();}
+document.getElementById('copy').addEventListener('click',copy);document.getElementById('download').addEventListener('click',download);document.getElementById('share').addEventListener('click',share);document.getElementById('show').addEventListener('click',showText);
+})();
+</script>
+</body>
+</html>
