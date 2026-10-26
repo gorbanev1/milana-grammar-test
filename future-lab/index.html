@@ -26,7 +26,7 @@ function pickGroup(group,count){const ids=(group==='order'?BANK.order:BANK.quest
 function createPass(){if(state.active&&!state.active.complete){banner('Сначала проверь все 60 заданий текущего прохода. Прогресс не сбрасывается.');return}
  const ids=GROUPS.flatMap(g=>pickGroup(g.id,g.count));
  state.active={run:state.history.length+1,started:new Date().toISOString(),ids,entries:{},complete:false,archived:false};state.section=0;state.tab='study';save();render();window.scrollTo({top:0,behavior:'smooth'})}
-if(!state.active)createPass();
+/* Первичное создание прохода выполняется после объявления всей теории. */
 function active(){return state.active}
 function entries(){return active().entries}
 function entry(id){return entries()[id]||(entries()[id]={values:[],checked:false});}
@@ -94,5 +94,5 @@ function dl(name,text,type='application/json'){let b=new Blob([text],{type:type+
 function exportBackup(){dl('milana-future-progress-'+new Date().toISOString().slice(0,10)+'.json',JSON.stringify({app:'milana_future_lab_330',version:1,state},null,2));banner('Резервная копия сохранена. Храни её отдельно от браузера.')}
 function importBackup(ev){let f=ev.target.files?.[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{let j=JSON.parse(r.result);if(j.app!=='milana_future_lab_330'||!j.state?.history||!j.state?.active?.ids)throw Error('Неподходящий файл');if(!confirm('Это заменит локальную историю данными из файла. Продолжить?'))return;state=j.state;save();render();banner('Прогресс восстановлен из файла.')}catch(e){banner('Не получилось загрузить резервную копию: '+e.message)}};r.readAsText(f)}
 function exportReport(){let lines=['Милана · Future Lab · 330 заданий','Завершено проходов: '+state.history.length,''];for(const h of state.history){lines.push('Проход '+h.run+' | '+new Date(h.finished).toLocaleString('ru-RU')+' | '+h.score+'/60');for(const id of h.ids){let q=byId[id],e=h.entries[id];lines.push((e.correct?'✓ ':'✗ ')+q.ru);lines.push('Ответ: '+(id.startsWith('order-')?e.order.map(i=>q.words[i]).join(' '):e.values.join(' | ')));if(!e.correct)lines.push('Почему: '+q.explain)}lines.push('')}dl('milana-future-history.txt',lines.join('\n'),'text/plain')}
-render();
+if(!state.active)createPass();else render();
 </script></body></html>
