@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="referrer" content="no-referrer">
+<title>Милана · Артикли и предлоги</title>
+<style>
+:root{--text:#29374b;--purple:#6842ad;--purple-light:#f5efff;--teal:#136b72;--teal-light:#eaf8f7;--line:#dce3ec;--red:#9b3b42}
+*{box-sizing:border-box}body{margin:0;background:#f4f6fa;color:var(--text);font:16px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}main{max-width:900px;margin:auto;padding:12px 12px 60px}
+header{padding:23px 19px;background:linear-gradient(120deg,#483083,#116d71);color:white;border-radius:18px}h1{margin:0;font-size:clamp(26px,6vw,36px)}h2{font-size:23px;margin:0 0 12px}h3{font-size:18px;margin:19px 0 8px}p{margin:9px 0}b{font-weight:720}
+nav{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.navlink,.navbtn{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;font:inherit;font-weight:700;padding:10px 13px;border-radius:12px;border:1px solid #cdd8e2;background:#fff;color:#2a485f;cursor:pointer}.navbtn[aria-selected=true]{background:var(--purple);color:white}.navbtn.preps[aria-selected=true]{background:var(--teal)}
+.card{border:1px solid var(--line);border-radius:17px;padding:18px;background:white;margin:13px 0;box-shadow:0 3px 15px #27384909}.article{border-top:5px solid var(--purple)}.preposition{border-top:5px solid var(--teal)}
+.lead{font-size:17px;line-height:1.65}.highlight{background:var(--purple-light);border-left:4px solid var(--purple);padding:12px;border-radius:0 10px 10px 0;margin:13px 0}.preposition .highlight{background:var(--teal-light);border-color:var(--teal)}
+.example{background:#f6f9fc;border-radius:11px;padding:11px 13px;margin:9px 0}.en{display:block;font-weight:730;color:#194e79;font-size:17px;overflow-wrap:anywhere}.ru{display:block;color:#586779;margin-top:3px}.emphasis{color:var(--purple)}.preposition .emphasis{color:var(--teal)}
+table{border-collapse:collapse;width:100%;font-size:15px}td,th{text-align:left;border-bottom:1px solid var(--line);padding:9px;vertical-align:top}th{background:#f5f7fb}.scroll{overflow-x:auto}details{border:1px solid var(--line);padding:10px 13px;border-radius:12px;margin:10px 0;background:white}summary{cursor:pointer;font-weight:750}
+.q{border:1px solid var(--line);border-radius:14px;padding:16px;background:#fff;margin:12px 0}.q.checked{border-color:#aacdc8}.q.wrong{border-color:#d9aaa7}
+.prompt{font-weight:730;margin-bottom:9px}.q select{display:block;width:100%;max-width:430px;border:1px solid #acbbca;background:white;border-radius:10px;padding:11px;font:inherit;font-size:16px;color:var(--text);margin:9px 0}.q button{border:none;background:var(--purple);color:white;border-radius:11px;padding:10px 16px;font:inherit;font-weight:750;cursor:pointer}.preposition .q button{background:var(--teal)}button:disabled{opacity:.65;cursor:default}.feedback{padding:12px;margin-top:12px;background:#edf9f5;border-radius:10px;overflow-wrap:anywhere}.wrong .feedback{background:#fff3f0}.feedback .en{margin:6px 0}.feedback p{margin:8px 0}.sep{height:1px;background:var(--line);margin:9px 0}
+.counter{font-weight:750;background:#f5f8fc;border-radius:12px;padding:11px 13px;margin:10px 0}.small{font-size:14px;color:#647285}.practice-intro{margin-bottom:15px}ul{padding-left:23px}li{margin:6px 0} .foot{margin:25px 0;color:#657386;font-size:14px}
+@media(max-width:570px){main{padding:8px 8px 35px}.card{padding:13px}.q{padding:13px}header{padding:18px 14px}.navlink,.navbtn{flex:1;min-width:130px}table{font-size:14px}td,th{padding:7px}}
+</style></head><body><main>
+<header><h1>Дополнительная грамматика</h1><p>Артикли и предлоги: понять смысл, научиться выбирать и проверить себя. Эти разделы не входят в обязательные 60 заданий по временам.</p></header>
+<nav aria-label="Темы обучения"><a class="navlink" href="./">📘 Времена · основной тест</a><button class="navbtn" id="tab-articles" type="button" aria-selected="true" onclick="showTopic('articles')">🟣 Артикли</button><button class="navbtn preps" id="tab-prepositions" type="button" aria-selected="false" onclick="showTopic('prepositions')">🟢 Предлоги</button><a class="navlink" href="public-results.html">📊 Результаты времён</a></nav>
+<div id="topic" aria-live="polite"></div>
+<p class="foot">Дополнительные ответы сохраняются отдельно на этом устройстве. Основной тест, уже выбранные 60 вопросов, история и облачная синхронизация не изменяются.</p>
+</main><script src="extra-topics.js?v=20261027-1"></script></body></html>
