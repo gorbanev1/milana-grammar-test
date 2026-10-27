@@ -7,16 +7,19 @@
 </style></head><body><div class="wrap"><header><h1>Милана · Общие результаты</h1><p>История проходов Future Lab. Баллы, ответы, ошибки и темы для повторения.</p><span class="tag">Публичный просмотр</span><span class="tag">Данные из JSON на GitHub</span></header>
 <div class="bar"><a class="btn" href="./">← К тесту</a><button class="btn" id="reload">↻ Обновить результаты</button></div>
 <div class="card"><p id="status" class="muted" role="status">Получаю результаты…</p><div class="stats" id="stats" hidden></div></div><div id="runs"></div><div class="card muted tiny">Результаты общедоступны. Записи появляются после автоматической отправки с телефона Миланы и публикации обновлённого JSON-файла. Сам исходный прогресс остаётся в её браузере.</div></div>
-<script src="cloud-config.js"></script><script src="feedback-rich.js?v=20261027-1"></script><script>
+<script src="cloud-config.js"></script><script src="site-nav.js?v=20261027-new"></script><script src="feedback-rich.js?v=20261027-1"></script><script>
 'use strict';const groupNames={order:'Порядок слов',simple:'Future Simple',continuous:'Future Continuous',perfect:'Future Perfect',perfect_cont:'Future Perfect Continuous',mixed:'Смешанные времена, планы и условия'};
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const api=String(window.MILANA_RESULTS_API||'').replace(/\/+$/,'');
+const filterTrack=new URLSearchParams(location.search).get('track')||'future';
+const trackNames={future:'Future',past:'Past',present:'Present',all:'Все времена',articles:'Артикли',prepositions:'Предлоги'};
+if(trackNames[filterTrack])document.querySelector('h1').textContent='Милана · Общие результаты · '+trackNames[filterTrack];
 const asDate=s=>{try{return new Date(s).toLocaleString('ru-RU')}catch{return String(s)}};
 let lastManifest='',loadingIndex=false;let richIndex={},richPromise=null;
 async function ensureRich(){if(richPromise)return richPromise;richPromise=fetch('./feedback-index.json?v=20261027-1').then(r=>{if(!r.ok)throw Error('нет каталога объяснений');return r.json()}).then(data=>{richIndex=data;return data}).catch(e=>{console.warn('Подробные объяснения недоступны',e);return {}});return richPromise;}
 async function index(){const u=api?api+'/api/runs':'./results.json';const r=await fetch(u,{cache:'no-store'});if(!r.ok)throw Error('Сервер вернул '+r.status);return r.json()}
 async function load(){if(loadingIndex)return;loadingIndex=true;try{
- const doc=await index(),runs=Array.isArray(doc.runs)?doc.runs:[];
+ const doc=await index(),runs=(Array.isArray(doc.runs)?doc.runs:[]).filter(h=>(h.track||'future')===filterTrack);
  const signature=runs.map(h=>h.id+':'+h.finished+':'+h.score).join('|');
  if(signature===lastManifest){document.getElementById('status').textContent=runs.length?`Сохранено проходов: ${runs.length} · обновляется автоматически`:'Пока нет записанных проходов';return}
  lastManifest=signature;
@@ -36,16 +39,16 @@ async function load(){if(loadingIndex)return;loadingIndex=true;try{
 async function loadRun(id){const el=document.getElementById('detail-'+id);if(!el)return;el.textContent='Загружаю ответы…';
  try{const detailUrl=api?api+'/api/runs/'+encodeURIComponent(id):'./cloud-runs/'+encodeURIComponent(id)+'.json?v='+Date.now();const r=await fetch(detailUrl,{cache:'no-store'});if(!r.ok)throw Error('Не удалось получить ответы с сервера ('+r.status+'). Повтори загрузку.');const h=await r.json();await ensureRich();
  const bad=h.questions.filter(q=>!q.correct);
- let html=`<p><b>Верно:</b> ${esc(h.score)}/60. <b>Ошибок:</b> ${bad.length}. <b>Пропусков верно:</b> ${esc(h.goodSlots||'—')}/${esc(h.slots||'—')}.</p>`;
+ let html=`<p><b>Верно:</b> ${esc(h.score)}/${esc(h.total||h.questions.length)}. <b>Ошибок:</b> ${bad.length}. <b>Пропусков верно:</b> ${esc(h.goodSlots||'—')}/${esc(h.slots||'—')}.</p>`;
  html+='<h4>Сначала задания с ошибками</h4>'+(bad.length?bad.map(renderQuestion).join(''):'<p class="good">Все задания без ошибок с первой попытки.</p>');
- html+='<details><summary>Показать все 60 заданий</summary>'+h.questions.map(renderQuestion).join('')+'</details>';
+ html+='<details><summary>Показать все '+h.questions.length+' заданий</summary>'+h.questions.map(renderQuestion).join('')+'</details>';
  el.innerHTML=html;
  }catch(e){el.textContent=e.message;}
 }
 function renderQuestion(q){
  const rich=richIndex?.[q.id];
  if(rich)return '<div class="q '+(q.correct?'ok':'')+'"><b>'+(q.correct?'✓':'✗')+' '+esc(q.prompt)+'</b><p>Тема: '+esc(groupNames[q.group]||q.group)+'</p>'+MilanaFeedback.render(rich,q.chosen,!q.correct)+'</div>';
- return '<div class="q '+(q.correct?'ok':'')+'"><b>'+(q.correct?'✓':'✗')+' '+esc(q.prompt)+'</b><p>Тема: '+esc(groupNames[q.group]||q.group)+'</p><p><b>Выбрано:</b> '+esc(q.chosen)+'</p><p><b>Верная форма:</b> '+esc(q.expected)+'</p><p><b>Почему:</b> '+esc(q.explanation)+'</p></div>';
+ return '<div class="q '+(q.correct?'ok':'')+'"><b>'+(q.correct?'✓':'✗')+' '+esc(q.prompt)+'</b><p>Тема: '+esc(groupNames[q.group]||q.group)+'</p><p><b>Ты выбрала:</b> '+esc(q.chosen).replaceAll(String.fromCharCode(10),'<br>')+'</p><p><b>Правильное предложение целиком:</b><br><strong>'+esc(q.fullSentence||q.expected).replaceAll(String.fromCharCode(10),'<br>')+'</strong></p>'+(q.translation?'<p><b>Перевод:</b> '+esc(q.translation)+'</p>':'')+'<p><b>Почему так:</b> '+esc(q.explanation)+'</p>'+(q.wrongParts||[]).map(x=>'<p class="err"><b>Ошибка «'+esc(x.chosen)+'» вместо «'+esc(x.expected)+'»:</b> '+esc(x.why)+'</p>').join('')+(q.examples||[]).map(x=>'<p><b>'+esc(x.en)+'</b> — '+esc(x.ru)+'</p>').join('')+'</div>';
 }
 document.getElementById('reload').addEventListener('click',load);load();
 setInterval(()=>{if(!document.hidden)load()},15000);

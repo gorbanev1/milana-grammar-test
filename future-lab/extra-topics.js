@@ -268,10 +268,10 @@ function checkExtra(t,id){
  const q=TOPICS[t]?.data.find(x=>x[0]===id),e=state[t]?.[id];
  if(!q||!e?.selected)return alert('Сначала выбери вариант для пропуска.');
  if(e.checked)return;
- e.checked=true;save();const y=window.scrollY;document.getElementById('topic').innerHTML=TOPICS[t].theory()+renderPractice(t);
+ e.checked=true;save();window.dispatchEvent(new CustomEvent('milana:extra-checked',{detail:{track:t}}));const y=window.scrollY;document.getElementById('topic').innerHTML=TOPICS[t].theory()+renderPractice(t);
  const node=document.getElementById('q-'+id);if(node){node.scrollIntoView({block:'center',behavior:'instant'})}
 }
-window.showTopic=showTopic;window.pickExtra=pickExtra;window.checkExtra=checkExtra;
+window.MILANA_EXTRA_TOPICS=TOPICS;window.showTopic=showTopic;window.pickExtra=pickExtra;window.checkExtra=checkExtra;
 window.addEventListener('hashchange',()=>showTopic(location.hash.slice(1)));
 showTopic(location.hash.slice(1));
 })();
