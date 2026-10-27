@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1,viewport-fit=cover"><meta name="referrer" content="no-referrer"><title>Милана — общие результаты Future Lab</title>
+<style>
+:root{--ink:#17364f;--blue:#1c507d;--line:#d6e2ec;--red:#933d47;--good:#167458}*{box-sizing:border-box}body{font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif;background:#f0f6fc;color:var(--ink);margin:0}.wrap{max-width:1060px;margin:auto;padding:14px}header{background:linear-gradient(120deg,#143959,#256997);color:#fff;padding:21px;border-radius:19px}h1{font-size:clamp(24px,5vw,36px);margin:0 0 8px}.tag{display:inline-block;margin:4px 5px 4px 0;border:1px solid #ffffff66;border-radius:30px;padding:4px 10px;font-size:13px}.bar{display:flex;gap:8px;flex-wrap:wrap;margin:13px 0}.btn{font:inherit;display:inline-block;border:1px solid #b3cddd;background:#fff;padding:10px 13px;border-radius:12px;color:var(--blue);font-weight:700;cursor:pointer;text-decoration:none}.card{background:#fff;border:1px solid var(--line);border-radius:17px;padding:18px;margin:13px 0;box-shadow:0 3px 15px #183b5d0b}.muted{color:#5c7184}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.stat{padding:12px;background:#f1f7fc;border:1px solid #dce7f1;border-radius:11px}.stat strong{font-size:26px;display:block}details{border:1px solid var(--line);border-radius:12px;margin:10px 0;padding:13px;background:#fff}summary{font-weight:750;cursor:pointer}.q{border-left:4px solid #d98a8a;background:#fff7f7;padding:11px;margin:10px 0;border-radius:10px;overflow-wrap:anywhere}.q.ok{border-left-color:#7ab7a2;background:#f3fbf7}.headrow{display:flex;gap:6px;flex-wrap:wrap;align-items:center;justify-content:space-between}.tiny{font-size:13px}.err{color:var(--red)}.good{color:var(--good)}.split{display:grid;grid-template-columns:1fr 1fr;gap:9px}.split > div{padding:10px;background:#f6f9fc;border-radius:9px}.topic{padding:8px 10px;background:#f4f8fc;border-radius:9px;border:1px solid var(--line);margin:5px 0}button:focus-visible,a:focus-visible{outline:3px solid #80b8e0}p{margin:8px 0}@media(max-width:590px){.wrap{padding:8px}.card{padding:12px}.stats{grid-template-columns:1fr 1fr}.split{grid-template-columns:1fr}}
+</style></head><body><div class="wrap"><header><h1>Милана · Общие результаты</h1><p>История проходов Future Lab. Баллы, ответы, ошибки и темы для повторения.</p><span class="tag">Публичный просмотр</span><span class="tag">Данные из JSON на GitHub</span></header>
+<div class="bar"><a class="btn" href="./">← К тесту</a><button class="btn" id="reload">↻ Обновить результаты</button></div>
+<div class="card"><p id="status" class="muted" role="status">Получаю результаты…</p><div class="stats" id="stats" hidden></div></div><div id="runs"></div><div class="card muted tiny">Результаты общедоступны. Записи появляются после автоматической отправки с телефона Миланы и публикации обновлённого JSON-файла. Сам исходный прогресс остаётся в её браузере.</div></div>
+<script src="cloud-config.js"></script><script>
+'use strict';const groupNames={order:'Порядок слов',simple:'Future Simple',continuous:'Future Continuous',perfect:'Future Perfect',perfect_cont:'Future Perfect Continuous',mixed:'Смешанные времена, планы и условия'};
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const api=String(window.MILANA_RESULTS_API||'').replace(/\/+$/,'');
+const asDate=s=>{try{return new Date(s).toLocaleString('ru-RU')}catch{return String(s)}};
+async function index(){const u=api?api+'/api/runs':'./results.json';const r=await fetch(u,{cache:'no-store'});if(!r.ok)throw Error('Сервер вернул '+r.status);return r.json()}
+async function load(){document.getElementById('status').textContent='Обновляю историю…';try{
+ const doc=await index(),runs=Array.isArray(doc.runs)?doc.runs:[];
+ document.getElementById('status').textContent=runs.length?`Сохранено проходов: ${runs.length}`:'Пока нет записанных проходов. После первой синхронизации они появятся здесь.';
+ const st=document.getElementById('stats');st.hidden=!runs.length;
+ if(runs.length)st.innerHTML=`<div class="stat"><strong>${runs.length}</strong>Проходов</div><div class="stat"><strong>${runs.reduce((n,x)=>n+(x.score||0),0)}</strong>Правильных ответов</div><div class="stat"><strong>${runs.reduce((n,x)=>n+(x.errors||0),0)}</strong>Ошибок</div>`;
+ document.getElementById('runs').innerHTML=runs.map((h,i)=>{
+   let topics=Object.entries(h.byGroup||{}).sort((a,b)=>(b[1].errors||0)-(a[1].errors||0));
+   return `<details class="card" data-id="${esc(h.id)}" ${i===0?'open':''}><summary>Проход №${esc(h.run)} · ${esc(asDate(h.finished))} · <span class="${h.errors?'err':'good'}">${esc(h.score)}/${esc(h.total)}</span> · ошибок ${esc(h.errors)}</summary>
+   <h3>По темам</h3>${topics.map(([g,x])=>`<div class="topic">${esc(groupNames[g]||g)}: <b>${esc(x.errors)} ошибок</b> из ${esc(x.total)} заданий</div>`).join('')}
+   <div class="headrow"><h3>Ответы и подробные ошибки</h3><button class="btn" type="button" onclick="loadRun('${esc(h.id)}')">Показать все задания</button></div><div id="detail-${esc(h.id)}" class="muted tiny">Нажми «Показать все задания», чтобы увидеть каждое предложение, ответ и причину ошибок.</div></details>`;
+ }).join('');
+ }catch(e){document.getElementById('status').textContent='Не удалось загрузить данные: '+e.message+'. Нажми «Обновить результаты». ';}
+}
+async function loadRun(id){const el=document.getElementById('detail-'+id);if(!el)return;el.textContent='Загружаю ответы…';
+ try{const r=await fetch('./cloud-runs/'+encodeURIComponent(id)+'.json?v='+Date.now(),{cache:'no-store'});if(!r.ok)throw Error('Файл ещё публикуется; попробуй чуть позже');const h=await r.json();
+ const bad=h.questions.filter(q=>!q.correct);
+ let html=`<p><b>Верно:</b> ${esc(h.score)}/60. <b>Ошибок:</b> ${bad.length}. <b>Пропусков верно:</b> ${esc(h.goodSlots||'—')}/${esc(h.slots||'—')}.</p>`;
+ html+='<h4>Сначала задания с ошибками</h4>'+(bad.length?bad.map(renderQuestion).join(''):'<p class="good">Все задания без ошибок с первой попытки.</p>');
+ html+='<details><summary>Показать все 60 заданий</summary>'+h.questions.map(renderQuestion).join('')+'</details>';
+ el.innerHTML=html;
+ }catch(e){el.textContent=e.message;}
+}
+function renderQuestion(q){return `<div class="q ${q.correct?'ok':''}"><b>${q.correct?'✓':'✗'} ${esc(q.prompt)}</b><p>Тема: ${esc(groupNames[q.group]||q.group)}</p><div class="split"><div><span class="tiny muted">Выбрано</span><br>${esc(q.chosen)}</div><div><span class="tiny muted">Правильно</span><br>${esc(q.expected)}</div></div><p><b>Почему:</b> ${esc(q.explanation)}</p>${(q.wrongParts||[]).map(p=>`<p class="err"><b>«${esc(p.chosen)}» вместо «${esc(p.expected)}»:</b> ${esc(p.why)}</p>`).join('')}</div>`}
+document.getElementById('reload').addEventListener('click',load);load();
+</script></body></html>
