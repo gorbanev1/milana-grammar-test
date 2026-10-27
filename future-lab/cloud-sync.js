@@ -7,7 +7,7 @@ const WRITER_KEY='milana_future_cloud_writer_v1';
 const API=String(window.MILANA_RESULTS_API||'').replace(/\/+$/,'');
 const msg=document.getElementById('cloud-status');
 const status=(t)=>{if(msg)msg.textContent=t};
-let inFlight=false, nextTry=0;
+let inFlight=false, nextTry=0, queued=false, retryTimer=null;
 function safeJSON(v,fallback){try{return JSON.parse(v)}catch{return fallback}}
 function getWriter(){let fromUrl=new URLSearchParams(location.hash.slice(1)).get('writer');
  if(fromUrl){try{localStorage.setItem(WRITER_KEY,fromUrl)}catch{}
@@ -50,10 +50,11 @@ async function convert(h){
   questions:rows
  };
 }
-async function sync(){
+async function sync(trigger='interval'){
  if(!API){status('Общие результаты пока не подключены к серверу. Локальные ответы сохранены.');return}
  if(!writer){status('Публичный просмотр доступен всем. Для автоматической отправки Милана один раз открывает личную ссылку.');return}
- if(inFlight || Date.now()<nextTry) return;
+ if(inFlight){queued=true;return}
+ if(Date.now()<nextTry && trigger!=='complete' && trigger!=='manual')return;
  const progress=safeJSON(localStorage.getItem(ORIGINAL_KEY),null);
  if(!Array.isArray(progress?.history)||!progress.history.length){status('Пока нет завершённых проходов. Прогресс продолжает сохраняться в браузере.');return}
  const acks=new Set(safeJSON(localStorage.getItem(ACK_KEY),'[]')||[]);
@@ -62,7 +63,7 @@ async function sync(){
  try{
   for(const h of [...progress.history].reverse()){
    const r=await convert(h);if(!r){skipped++;continue;}if(acks.has(r.id))continue;
-   status(`Синхронизирую проход №${h.run}…`);
+   status(`⏳ Проход №${h.run}: отправляю в общие результаты…`);
    const reply=await fetch(API+'/api/runs',{
      method:'POST',mode:'cors',cache:'no-store',headers:{'Content-Type':'application/json','X-Milana-Key':writer},
      body:JSON.stringify(r),signal:AbortSignal.timeout(25000)
@@ -72,15 +73,27 @@ async function sync(){
    acks.add(r.id);done++;
    localStorage.setItem(ACK_KEY,JSON.stringify([...acks]));
   }
-  status(done?`✅ В облако сохранено новых проходов: ${done}. Локальная история не изменена.`:skipped?`⚠️ ${skipped} завершённых проходов пока не удалось прочитать для переноса. Открой «Проверка переноса», чтобы увидеть подробности.`:'✅ Все завершённые проходы синхронизированы.');
+  status(done?`✅ ${done===1?'Проход сохранён':'Проходы сохранены'} в общей истории: ${done}. Можно смотреть ответы и ошибки с другого устройства.`:skipped?`⚠️ ${skipped} завершённых проходов пока не удалось прочитать для переноса. Старые ответы не изменены.`:'✅ Все завершённые проходы доступны в общей истории.');
  }catch(err){
   console.warn('Future Lab cloud sync:',err);
   status('⚠️ Сервер пока недоступен ('+String(err.message).slice(0,90)+'). Локальные ответы не потеряны; повторю отправку.');
-  nextTry=Date.now()+25000;
- }finally{inFlight=false}
+  nextTry=Date.now()+10000;
+  if(retryTimer)clearTimeout(retryTimer);
+  retryTimer=setTimeout(()=>{retryTimer=null;sync('retry')},10500);
+ }finally{
+  inFlight=false;
+  if(queued){queued=false;queueMicrotask(()=>sync('queued'))}
+ }
 }
 // Read existing localStorage on every page load and regularly thereafter; never mutate its state.
-window.addEventListener('load',()=>{setTimeout(sync,700);setInterval(sync,10000)});
-document.addEventListener('visibilitychange',()=>{if(!document.hidden)setTimeout(sync,1000)});
-window.milanaSyncNow=sync;
+window.addEventListener('load',()=>{setTimeout(()=>sync('load'),700);setInterval(()=>sync('interval'),10000)});
+window.addEventListener('milana:run-completed',()=>{
+ nextTry=0;
+ status('⏳ Проход проверен, отправляю в общую историю автоматически…');
+ sync('complete');
+});
+window.addEventListener('online',()=>sync('online'));
+window.addEventListener('pageshow',()=>sync('pageshow'));
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)setTimeout(()=>sync('visible'),300)});
+window.milanaSyncNow=()=>sync('manual');
 })();

@@ -10,22 +10,28 @@
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const api=String(window.MILANA_RESULTS_API||'').replace(/\/+$/,'');
 const asDate=s=>{try{return new Date(s).toLocaleString('ru-RU')}catch{return String(s)}};
+let lastManifest='',loadingIndex=false;
 async function index(){const u=api?api+'/api/runs':'./results.json';const r=await fetch(u,{cache:'no-store'});if(!r.ok)throw Error('Сервер вернул '+r.status);return r.json()}
-async function load(){document.getElementById('status').textContent='Обновляю историю…';try{
+async function load(){if(loadingIndex)return;loadingIndex=true;try{
  const doc=await index(),runs=Array.isArray(doc.runs)?doc.runs:[];
- document.getElementById('status').textContent=runs.length?`Сохранено проходов: ${runs.length}`:'Пока нет записанных проходов. После первой синхронизации они появятся здесь.';
+ const signature=runs.map(h=>h.id+':'+h.finished+':'+h.score).join('|');
+ if(signature===lastManifest){document.getElementById('status').textContent=runs.length?`Сохранено проходов: ${runs.length} · обновляется автоматически`:'Пока нет записанных проходов';return}
+ lastManifest=signature;
+ document.getElementById('status').textContent=runs.length?`Сохранено проходов: ${runs.length} · обновляется автоматически`:'Пока нет записанных проходов. После первой синхронизации они появятся здесь.';
  const st=document.getElementById('stats');st.hidden=!runs.length;
  if(runs.length)st.innerHTML=`<div class="stat"><strong>${runs.length}</strong>Проходов</div><div class="stat"><strong>${runs.reduce((n,x)=>n+(x.score||0),0)}</strong>Правильных ответов</div><div class="stat"><strong>${runs.reduce((n,x)=>n+(x.errors||0),0)}</strong>Ошибок</div>`;
  document.getElementById('runs').innerHTML=runs.map((h,i)=>{
    let topics=Object.entries(h.byGroup||{}).sort((a,b)=>(b[1].errors||0)-(a[1].errors||0));
-   return `<details class="card" data-id="${esc(h.id)}" ${i===0?'open':''}><summary>Проход №${esc(h.run)} · ${esc(asDate(h.finished))} · <span class="${h.errors?'err':'good'}">${esc(h.score)}/${esc(h.total)}</span> · ошибок ${esc(h.errors)}</summary>
+   return `<details class="card" data-id="${esc(h.id)}" ${i===0?'open':''}><summary>Проход №${esc(runs.length-i)} · ${esc(asDate(h.finished))} · <span class="${h.errors?'err':'good'}">${esc(h.score)}/${esc(h.total)}</span> · ошибок ${esc(h.errors)}</summary>
    <h3>По темам</h3>${topics.map(([g,x])=>`<div class="topic">${esc(groupNames[g]||g)}: <b>${esc(x.errors)} ошибок</b> из ${esc(x.total)} заданий</div>`).join('')}
    <div class="headrow"><h3>Ответы и подробные ошибки</h3><button class="btn" type="button" onclick="loadRun('${esc(h.id)}')">Показать все задания</button></div><div id="detail-${esc(h.id)}" class="muted tiny">Нажми «Показать все задания», чтобы увидеть каждое предложение, ответ и причину ошибок.</div></details>`;
  }).join('');
+ if(runs.length)loadRun(runs[0].id);
  }catch(e){document.getElementById('status').textContent='Не удалось загрузить данные: '+e.message+'. Нажми «Обновить результаты». ';}
+ finally{loadingIndex=false}
 }
 async function loadRun(id){const el=document.getElementById('detail-'+id);if(!el)return;el.textContent='Загружаю ответы…';
- try{const r=await fetch('./cloud-runs/'+encodeURIComponent(id)+'.json?v='+Date.now(),{cache:'no-store'});if(!r.ok)throw Error('Файл ещё публикуется; попробуй чуть позже');const h=await r.json();
+ try{const detailUrl=api?api+'/api/runs/'+encodeURIComponent(id):'./cloud-runs/'+encodeURIComponent(id)+'.json?v='+Date.now();const r=await fetch(detailUrl,{cache:'no-store'});if(!r.ok)throw Error('Не удалось получить ответы с сервера ('+r.status+'). Повтори загрузку.');const h=await r.json();
  const bad=h.questions.filter(q=>!q.correct);
  let html=`<p><b>Верно:</b> ${esc(h.score)}/60. <b>Ошибок:</b> ${bad.length}. <b>Пропусков верно:</b> ${esc(h.goodSlots||'—')}/${esc(h.slots||'—')}.</p>`;
  html+='<h4>Сначала задания с ошибками</h4>'+(bad.length?bad.map(renderQuestion).join(''):'<p class="good">Все задания без ошибок с первой попытки.</p>');
@@ -35,4 +41,7 @@ async function loadRun(id){const el=document.getElementById('detail-'+id);if(!el
 }
 function renderQuestion(q){return `<div class="q ${q.correct?'ok':''}"><b>${q.correct?'✓':'✗'} ${esc(q.prompt)}</b><p>Тема: ${esc(groupNames[q.group]||q.group)}</p><div class="split"><div><span class="tiny muted">Выбрано</span><br>${esc(q.chosen)}</div><div><span class="tiny muted">Правильно</span><br>${esc(q.expected)}</div></div><p><b>Почему:</b> ${esc(q.explanation)}</p>${(q.wrongParts||[]).map(p=>`<p class="err"><b>«${esc(p.chosen)}» вместо «${esc(p.expected)}»:</b> ${esc(p.why)}</p>`).join('')}</div>`}
 document.getElementById('reload').addEventListener('click',load);load();
+setInterval(()=>{if(!document.hidden)load()},15000);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)load()});
+window.addEventListener('focus',load);
 </script></body></html>
