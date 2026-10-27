@@ -1,4 +1,50 @@
 {
   "schema": 1,
-  "runs": []
+  "updated": "2026-10-27T11:13:34.930Z",
+  "runs": [
+    {
+      "id": "f01f09d822e786fcb227ce4f1d8f4ad4539fa57f92fb87b3ae1c8e95fbfbae22",
+      "run": 1,
+      "started": "2026-10-26T11:07:01.299Z",
+      "finished": "2026-10-26T17:22:07.356Z",
+      "score": 51,
+      "total": 60,
+      "errors": 9,
+      "slots": 76,
+      "goodSlots": 67,
+      "byGroup": {
+        "order": {
+          "total": 6,
+          "correct": 5,
+          "errors": 1
+        },
+        "simple": {
+          "total": 11,
+          "correct": 7,
+          "errors": 4
+        },
+        "continuous": {
+          "total": 11,
+          "correct": 10,
+          "errors": 1
+        },
+        "perfect": {
+          "total": 11,
+          "correct": 10,
+          "errors": 1
+        },
+        "perfect_cont": {
+          "total": 11,
+          "correct": 11,
+          "errors": 0
+        },
+        "mixed": {
+          "total": 10,
+          "correct": 8,
+          "errors": 2
+        }
+      },
+      "file": "cloud-runs/f01f09d822e786fcb227ce4f1d8f4ad4539fa57f92fb87b3ae1c8e95fbfbae22.json"
+    }
+  ]
 }
