@@ -89,12 +89,41 @@ function renderQuestion(q,n){
  '<button class="btn primary" '+(e.checked?'disabled':'')+' onclick="check(\''+q.id+'\')">'+(e.checked?'Проверено ✓':'Проверить')+'</button>'+
  (e.checked?notes(q,e):'')+'</article>';
 }
+function glossary(){
+ const items=window.MILANA_FORMULA_LEGEND||[];
+ return '<details class="card grammar-glossary"><summary>🔑 Что означают V1, V2, V3, V-ing и «подлежащее»?</summary><p>Каждая формула показывает реальный порядок слов: сначала подлежащее, затем вспомогательные глаголы и смысловой глагол. Нажми на название, чтобы открыть определения.</p>'+
+ '<div class="glossary-grid">'+items.map(([k,v])=>'<div class="glossary-item"><b>'+esc(k)+'</b><p>'+esc(v)+'</p></div>').join('')+'</div></details>';
+}
+function formulaRow(label,symbol,row){
+ return '<div class="formula-row"><div class="formula-label">'+symbol+' '+label+'</div>'+
+ '<div class="formula-expression">'+esc(row[0])+'</div><div class="formula-example">'+
+ '<span class="en">'+esc(row[1])+'</span><span class="ru">'+esc(row[2])+'</span></div></div>';
+}
+function formulaCard(key,folded=false){
+ const x=window.MILANA_TENSE_FORMULAS?.[key];if(!x)return '';
+ const content='<div class="formula-body"><p>'+esc(x.meaning)+'</p>'+
+ formulaRow('УТВЕРЖДЕНИЕ','+',x.affirmative)+formulaRow('ОТРИЦАНИЕ','−',x.negative)+formulaRow('ВОПРОС','?',x.question)+
+ '<div class="formula-why"><b>Почему именно такой порядок:</b> '+esc(x.explained)+'</div>'+
+ (x.notes||[]).map(([head,txt])=>'<div class="formula-tip"><b>'+esc(head)+':</b> '+esc(txt)+'</div>').join('')+'</div>';
+ if(folded){
+  return '<details class="formula-block"><summary><b>'+esc(x.title)+'</b><span class="formula-mini">'+esc(x.affirmative[0])+'</span></summary>'+content+'</details>';
+ }
+ return '<div class="formula-block"><h4>'+esc(x.title)+'</h4>'+content+'</div>';
+}
+function formulaSection(idx){
+ const ids=window.MILANA_FORMULA_MAP?.[track]?.[idx]||[];
+ if(!ids.length)return '';
+ const multiple=ids.length>1;
+ return '<div class="course-formulas"><h3>🧩 Как образуется: формулы, порядок слов и примеры</h3>'+
+ (multiple?'<p class="muted">Ниже — формулы конструкций, которые сравниваются в этой теме. Нажми на название времени, чтобы открыть утверждение, отрицание, вопрос и полные примеры с переводом.</p>':'<p class="muted">Три обязательные схемы: как сказать, как отрицать и как задать вопрос. Формула выделена отдельно от примера.</p>')+
+ ids.map(key=>formulaCard(key,multiple)).join('')+'</div>';
+}
 function showTheory(){
  const theory=window.MILANA_COURSE_THEORY[track];
- const rows=theory.map((t,i)=>'<section class="card theory"><h2>'+(i+1)+'. '+esc(t.title)+'</h2><div class="highlight"><b>Главная мысль:</b> '+esc(t.idea)+'</div><h3>Как образуется</h3><p>'+esc(t.rules)+'</p>'+
+ const rows=theory.map((t,i)=>'<section class="card theory"><h2>'+(i+1)+'. '+esc(t.title)+'</h2><div class="highlight"><b>Главная мысль:</b> '+esc(t.idea)+'</div>'+formulaSection(i)+
  (t.signal?'<h3>Когда выбирать</h3><p>'+esc(t.signal)+'</p>':'')+
  '<h3>Полные примеры, переводы и смысловые контрасты</h3><div class="pairs">'+t.examples.map(([en,ru])=>'<div class="pair"><span class="en">'+esc(en)+'</span><span class="ru">'+esc(ru)+'</span></div>').join('')+'</div></section>').join('');
- return '<div class="card"><h2>'+esc(names[track])+'</h2><p>'+(track==='all'?'100 самостоятельных заданий на сравнение реальных смысловых ситуаций. В одном проходе — 30 заданий, 20 разных смысловых контрастов.':'383 задания в банке: 4 времени, смешанные ситуации и порядок слов. Один проход — 60 заданий, как в Future.')+'</p><button class="btn primary" onclick="openPane(\'practice\')">К заданиям →</button></div>'+rows;
+ return '<div class="card"><h2>'+esc(names[track])+'</h2><p>'+(track==='all'?'100 самостоятельных заданий на сравнение реальных смысловых ситуаций. В одном проходе — 30 заданий, 20 разных смысловых контрастов.':'383 задания в банке: 4 времени, смешанные ситуации и порядок слов. Один проход — 60 заданий, как в Future.')+'</p><button class="btn primary" onclick="openPane(\'practice\')">К заданиям →</button></div>'+glossary()+rows;
 }
 function showPractice(){
  let ids=cur().ids;

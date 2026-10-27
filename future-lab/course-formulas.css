@@ -1,0 +1,33 @@
+/* Human-readable formula teaching: each tense has statement, negation and question. */
+.grammar-glossary{border-top:5px solid #2d6d97}
+.grammar-glossary>p{color:#3a536b}
+.glossary-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
+.glossary-item{background:#f4f8fd;border:1px solid #dce8f1;border-radius:12px;padding:11px 13px}
+.glossary-item b{color:#1b5785;font-size:17px}
+.glossary-item p{margin:4px 0 0;font-size:15px;line-height:1.45}
+.course-formulas{margin:20px 0 24px}
+.course-formulas h3{font-size:clamp(19px,4.8vw,23px);margin:0 0 10px}
+.formula-block{background:#f5f9fc;border:1px solid #bbd1e2;border-radius:15px;padding:15px;margin:11px 0;overflow-wrap:anywhere}
+.formula-block>h4{color:#194e78;margin:0 0 10px;font-size:19px}
+.formula-block summary{cursor:pointer;font-size:17px;line-height:1.5;color:#174e7c;list-style-position:outside}
+.formula-block summary .formula-mini{display:block;color:#38556c;font-size:15px;font-weight:500;margin:6px 0 0;word-break:normal}
+.formula-block[open] summary{padding-bottom:10px;border-bottom:1px solid #d1e0eb}
+.formula-body>p{margin:9px 0 13px;color:#3e556a}
+.formula-row{background:white;border:1px solid #d5e3ed;border-radius:12px;padding:12px;margin:9px 0}
+.formula-label{font-size:14px;font-weight:850;letter-spacing:.025em;color:#1c614c;text-transform:uppercase}
+.formula-row:nth-of-type(2) .formula-label{color:#a3474d}
+.formula-row:nth-of-type(3) .formula-label{color:#295da5}
+.formula-expression{font-size:17px;line-height:1.55;font-weight:800;color:#183f61;background:#eaf3ff;padding:11px;border-left:4px solid #2973b7;border-radius:0 9px 9px 0;margin:8px 0;overflow-wrap:anywhere;white-space:normal}
+.formula-example{line-height:1.55}
+.formula-example .en{display:block;font-size:17px;color:#184a77;font-weight:760}
+.formula-example .ru{display:block;color:#43576e;font-size:15.5px;margin-top:4px}
+.formula-why{border-left:4px solid #298776;background:#eaf7f2;border-radius:0 9px 9px 0;padding:11px 12px;margin:12px 0;line-height:1.6}
+.formula-tip{background:#fff8e9;border-left:3px solid #d9a140;border-radius:0 8px 8px 0;padding:10px 12px;margin:9px 0;line-height:1.6}
+@media(max-width:650px){
+ .glossary-grid{grid-template-columns:1fr}
+ .glossary-item{padding:10px}
+ .formula-block{padding:11px}
+ .formula-row{padding:10px}
+ .formula-expression{font-size:16.5px;padding:10px}
+ .formula-example .en{font-size:16.5px}
+}
