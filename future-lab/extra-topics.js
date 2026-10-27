@@ -222,6 +222,15 @@ function options(q,t,entry){
  return '<label for="'+esc(q[0])+'">Выбери вариант для пропуска:</label><select id="'+esc(q[0])+'" '+(entry?.checked?'disabled':'')+' onchange="pickExtra(\''+esc(t)+'\',\''+esc(q[0])+'\',this.value)">'+
  '<option value="">— выбери —</option>'+TOPICS[t].opts.map(v=>'<option value="'+esc(v)+'" '+(entry?.selected===v?'selected':'')+'>'+(v==='∅'?'∅ — без артикля/предлога':esc(v))+'</option>').join('')+'</select>';
 }
+function wrongExplanation(q,selected){
+ const isPrep=q[0].startsWith('p');
+ if(isPrep){
+  const meanings={in:'IN обычно рисует нахождение внутри пространства или времени-периода.',on:'ON обычно подчёркивает поверхность, линию, календарный день или носитель.',at:'AT обычно обозначает конкретную точку места/времени или событие.','∅':'Отсутствие предлога допустимо в особых временных выражениях: tomorrow, next Monday, last year и т. п.'};
+  return meanings[selected]+' Но здесь важна другая связь: '+q[6]+' Сравни оба полных примера ниже.';
+ }
+ const meanings={a:'A представляет один неопределённый предмет перед согласным звуком.',an:'AN представляет один неопределённый предмет перед гласным звуком.',the:'THE предполагает, что предмет или группа достаточно определены для собеседника.','∅':'Нулевой артикль часто нужен для общего множественного или неисчисляемого значения, имён и особых выражений.'};
+ return meanings[selected]+' Но в этом предложении: '+q[6]+' Проверь исчисляемость, определённость и первый произносимый звук.';
+}
 function feedback(q,entry){
  const ok=entry.selected===q[4],correct=sentence(q,q[4]),chosen=sentence(q,entry.selected);
  return '<div class="feedback">'+
@@ -229,7 +238,7 @@ function feedback(q,entry){
  '<p><b>Полное правильное предложение:</b><span class="en">'+esc(correct)+'</span><span class="ru">'+esc(q[5])+'</span></p>'+
  (ok?'':'<p><b>Что получилось с твоим выбором:</b><span class="en">'+esc(chosen)+'</span></p>')+
  '<p><b>Почему '+esc(q[4])+':</b> '+esc(q[6])+'</p>'+
- (!ok?'<p><b>Ошибка:</b> В твоём варианте «'+esc(entry.selected)+'» меняет нужное значение или не соответствует правилу. Верный выбор именно в этой ситуации — «'+esc(q[4])+'». Другие формы могут быть правильны в другом контексте.</p>':'')+
+ (!ok?'<p><b>Почему вариант «'+esc(entry.selected)+'» не подходит:</b> '+esc(wrongExplanation(q,entry.selected))+'</p>':'')+
  '<div class="sep"></div><p><b>Сравни с другим полным примером:</b></p><span class="en">'+esc(q[7])+'</span><span class="ru">'+esc(q[8])+'</span></div>';
 }
 function renderPractice(t){
