@@ -58,10 +58,10 @@ async function sync(){
  if(!Array.isArray(progress?.history)||!progress.history.length){status('Пока нет завершённых проходов. Прогресс продолжает сохраняться в браузере.');return}
  const acks=new Set(safeJSON(localStorage.getItem(ACK_KEY),'[]')||[]);
  inFlight=true;
- let done=0;
+ let done=0, skipped=0;
  try{
   for(const h of [...progress.history].reverse()){
-   const r=await convert(h);if(!r || acks.has(r.id))continue;
+   const r=await convert(h);if(!r){skipped++;continue;}if(acks.has(r.id))continue;
    status(`Синхронизирую проход №${h.run}…`);
    const reply=await fetch(API+'/api/runs',{
      method:'POST',mode:'cors',cache:'no-store',headers:{'Content-Type':'application/json','X-Milana-Key':writer},
@@ -72,7 +72,7 @@ async function sync(){
    acks.add(r.id);done++;
    localStorage.setItem(ACK_KEY,JSON.stringify([...acks]));
   }
-  status(done?`✅ В облако сохранено новых проходов: ${done}. Локальная история не изменена.`:'✅ Все завершённые проходы синхронизированы.');
+  status(done?`✅ В облако сохранено новых проходов: ${done}. Локальная история не изменена.`:skipped?`⚠️ ${skipped} завершённых проходов пока не удалось прочитать для переноса. Открой «Проверка переноса», чтобы увидеть подробности.`:'✅ Все завершённые проходы синхронизированы.');
  }catch(err){
   console.warn('Future Lab cloud sync:',err);
   status('⚠️ Сервер пока недоступен ('+String(err.message).slice(0,90)+'). Локальные ответы не потеряны; повторю отправку.');

@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="referrer" content="no-referrer">
+<title>Милана — проверка сохранения</title>
+<style>
+:root{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:#18344d;background:#eef5fc}*{box-sizing:border-box}body{margin:0}.wrap{max-width:740px;margin:0 auto;padding:18px 14px 38px}h1{font-size:clamp(23px,5vw,34px);line-height:1.2}h2{font-size:19px}.card{padding:17px;border:1px solid #d5e3ef;border-radius:16px;background:#fff;margin:12px 0;box-shadow:0 3px 12px #102c4d0a}.stat{margin:7px 0;padding:10px 12px;border:1px solid #d7e4ee;border-radius:10px;background:#f5f9fd;overflow-wrap:anywhere}.good{color:#12734d}.bad{color:#aa2636}.muted{color:#627990}.btn{border:0;border-radius:12px;padding:14px 17px;background:#154d7e;color:#fff;font:inherit;font-weight:700;cursor:pointer;width:100%;min-height:49px}.btn:disabled{background:#9eafbd}.btn.light{background:#e9f1f8;color:#174b73;margin-top:9px}.tiny{font-size:13px}a{color:#135c94;overflow-wrap:anywhere}code{font-size:.9em;overflow-wrap:anywhere}#cloud-status{min-height:45px;white-space:pre-wrap}ul{padding-left:21px}li{margin:7px 0}
+</style></head><body><main class="wrap">
+<h1>Милана — проверка переноса результатов</h1><p>Эта страница ничего не удаляет и не изменяет в старой истории. Она помогает понять, почему проходы ещё не видны другим людям.</p>
+<section class="card"><h2>Что видит этот браузер</h2><div id="local">Проверяю…</div><div id="writer">Проверяю…</div><div id="client">Проверяю…</div></section>
+<section class="card"><h2>Общий сервер</h2><div id="server">Проверяю…</div><div id="cloud-status" role="status" aria-live="polite">Подготавливаю перенос…</div>
+<button id="send" class="btn" disabled>Отправить завершённые проходы</button>
+<button id="refresh" class="btn light">Проверить состояние снова</button></section>
+<section class="card"><h2>Что означают результаты</h2><ul>
+<li><b>Локальных проходов 0:</b> возможно, ссылка открылась во встроенном браузере Telegram. Открой её в <b>обычном Safari</b> на том же iPhone, где проходила тест.</li>
+<li><b>Есть незавершённый проход, но завершённых 0:</b> нужно закончить все 60 заданий. Незаконченный проход не публикуется.</li>
+<li><b>Разрешение на отправку отсутствует:</b> открой <b>личную ссылку</b>, присланную для Миланы, в том же Safari. Не публикуй её.</li>
+<li><b>Ошибки сети:</b> ответы остаются в телефоне; повтори отправку, когда есть интернет.</li></ul>
+<p class="tiny muted">Не нужно очищать Safari, историю, cookies или localStorage. Никакой пароль и личную ссылку никому показывать не нужно.</p></section>
+<p><a href="./">Вернуться к тесту</a> · <a href="public-results.html">Открыть общие результаты</a></p>
+</main>
+<script src="cloud-config.js"></script>
+<script>
+'use strict';
+const OLD='milana_future_lab_330_v1', WRITER='milana_future_cloud_writer_v1', ACK='milana_future_cloud_ack_v1';
+const el=id=>document.getElementById(id),box=(message)=>'<div class="stat">'+message+'</div>';
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let bankReady=false;
+function localCheck(){
+ try{
+ const raw=localStorage.getItem(OLD),s=raw?JSON.parse(raw):null;
+ const history=Array.isArray(s?.history)?s.history:[];
+ const done=history.length;
+ const active=s?.active;
+ const checked=active?.entries?Object.values(active.entries).filter(x=>x?.checked).length:0;
+ const pending=!!active && !active.complete;
+ el('local').innerHTML=box('<b>Завершённых проходов в этом браузере: '+done+'</b>')+
+ box('Незавершённый проход: '+(pending?'да, проверено '+checked+' из 60':'нет'))+
+ box('Старый ключ найден: '+(raw?'да':'нет')+' — <code>'+OLD+'</code>');
+ const token=localStorage.getItem(WRITER)||new URLSearchParams(location.hash.slice(1)).get('writer');
+ el('writer').innerHTML=box('<b>Разрешение на отправку: '+(token?'<span class="good">есть</span>':'<span class="bad">нет</span>')+'</b>')+
+ box('Уже подтверждённых передач в этом браузере: '+(JSON.parse(localStorage.getItem(ACK)||'[]').length||0));
+ const ua=navigator.userAgent||'',isTelegram=/Telegram|FBAN|FBAV|Instagram|CriOS.*Telegram/i.test(ua);
+ el('client').innerHTML=box('Браузер: '+(isTelegram?'<b class="bad">похож на встроенный</b>':/Safari/i.test(ua)&&!/CriOS|FxiOS|EdgiOS/i.test(ua)?'Safari или системный WebKit':esc(ua.slice(0,100))))+
+ (done===0?'<p class="bad">Этот браузер не видит ни одного завершённого прохода. Сначала проверь Safari и количество завершённых тестов.</p>':'');
+ return {done,writer:!!token}
+ }catch(e){el('local').textContent='Не удалось прочитать локальные данные: '+e.message;return {done:0,writer:false}}
+}
+async function serverCheck(){
+ const api=String(window.MILANA_RESULTS_API||'').replace(/\/$/,'');
+ if(!api){el('server').textContent='Адрес сервера не указан.';return}
+ try{
+ const response=await fetch(api+'/api/runs',{cache:'no-store'}),j=await response.json();
+ if(!response.ok)throw Error(j.error||'HTTP '+response.status);
+ el('server').innerHTML=box('<b>Сервер работает. Всего опубликовано проходов: '+(j.runs||[]).length+'</b>');
+ }catch(e){el('server').innerHTML=box('<span class="bad">Сервер недоступен: '+esc(e.message)+'</span>')}
+}
+async function init(){
+ localCheck();await serverCheck();
+ try{
+ const res=await fetch('./index.html',{cache:'no-store'});if(!res.ok)throw Error('Не удалось прочитать банк заданий: '+res.status);
+ const source=await res.text(),doc=new DOMParser().parseFromString(source,'text/html'),text=doc.querySelector('script#bank')?.textContent;
+ if(!text)throw Error('В тесте отсутствует банк заданий');
+ const bank=JSON.parse(text);
+ window.byId=Object.fromEntries([...bank.questions,...bank.order].map(q=>[q.id,q]));
+ bankReady=true;
+ const script=document.createElement('script');script.src='./cloud-sync.js';
+ script.onload=()=>{el('send').disabled=false;localCheck();window.milanaSyncNow?.();setTimeout(serverCheck,1800)};
+ script.onerror=()=>{el('cloud-status').textContent='Не удалось загрузить модуль синхронизации';};
+ document.body.append(script);
+ }catch(e){el('cloud-status').textContent='Ошибка подготовки: '+e.message}
+}
+el('send').addEventListener('click',async()=>{if(!bankReady)return;el('send').disabled=true;try{await window.milanaSyncNow?.();localCheck();await serverCheck()}finally{el('send').disabled=false}});
+el('refresh').addEventListener('click',()=>{localCheck();serverCheck()});
+init();
+</script></body></html>
