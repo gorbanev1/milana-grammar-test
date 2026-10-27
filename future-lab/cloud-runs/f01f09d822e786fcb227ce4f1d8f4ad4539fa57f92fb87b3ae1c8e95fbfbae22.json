@@ -1,0 +1,661 @@
+{
+  "schema": 1,
+  "id": "f01f09d822e786fcb227ce4f1d8f4ad4539fa57f92fb87b3ae1c8e95fbfbae22",
+  "runNumber": 1,
+  "started": "2026-10-26T11:07:01.299Z",
+  "finished": "2026-10-26T17:22:07.356Z",
+  "score": 51,
+  "total": 60,
+  "slots": 76,
+  "goodSlots": 67,
+  "questions": [
+    {
+      "id": "order-006",
+      "group": "order",
+      "prompt": "Она будет спать завтра в десять.",
+      "correct": false,
+      "chosen": "She will be sleeping tomorrow at ten",
+      "expected": "She will be sleeping at ten tomorrow.",
+      "explanation": "Будущий процесс: подлежащее + will + be + глагол с -ing.",
+      "wrongParts": []
+    },
+    {
+      "id": "order-003",
+      "group": "order",
+      "prompt": "Ты поможешь мне завтра?",
+      "correct": true,
+      "chosen": "Will you help me tomorrow",
+      "expected": "Will you help me tomorrow?",
+      "explanation": "В общем вопросе Future Simple сначала will, затем подлежащее you, затем глагол help.",
+      "wrongParts": []
+    },
+    {
+      "id": "order-019",
+      "group": "order",
+      "prompt": "Мы поедем, когда автобус приедет.",
+      "correct": true,
+      "chosen": "We will leave when the bus arrives",
+      "expected": "We will leave when the bus arrives.",
+      "explanation": "После when в придаточном времени — Present Simple arrives, хотя событие произойдёт позже.",
+      "wrongParts": []
+    },
+    {
+      "id": "order-022",
+      "group": "order",
+      "prompt": "Она собирается готовить ужин сегодня вечером.",
+      "correct": true,
+      "chosen": "She is going to cook dinner tonight",
+      "expected": "She is going to cook dinner tonight.",
+      "explanation": "План: She is going to + V1. Перед going нужно is, потому что she.",
+      "wrongParts": []
+    },
+    {
+      "id": "order-025",
+      "group": "order",
+      "prompt": "Поезд отправляется завтра в семь.",
+      "correct": true,
+      "chosen": "The train leaves at seven tomorrow",
+      "expected": "The train leaves at seven tomorrow.",
+      "explanation": "Для расписания используем Present Simple leaves, хотя действие относится к будущему.",
+      "wrongParts": []
+    },
+    {
+      "id": "order-028",
+      "group": "order",
+      "prompt": "Мы встречаемся с учителем в пятницу.",
+      "correct": true,
+      "chosen": "We are meeting the teacher on Friday",
+      "expected": "We are meeting the teacher on Friday.",
+      "explanation": "Договорённость: We are meeting + указание будущего времени.",
+      "wrongParts": []
+    },
+    {
+      "id": "simple-041",
+      "group": "simple",
+      "prompt": "Решение принимается сейчас: «Хорошо, папа сейчас собрать модель». Главное — решение в момент речи.",
+      "correct": false,
+      "chosen": "will be building",
+      "expected": "will build",
+      "explanation": "Решение принято прямо в момент разговора, поэтому подходит will + первая форма глагола. Здесь нет будущей точки отсчёта, к которой действие уже должно закончиться, и мы не описываем процесс.",
+      "wrongParts": [
+        {
+          "chosen": "will be building",
+          "expected": "will build",
+          "why": "Почему «will be building» не подходит: Эта форма описывает процесс, а по условию нужен обычный будущий факт, решение или обещание."
+        }
+      ]
+    },
+    {
+      "id": "simple-010",
+      "group": "simple",
+      "prompt": "Вопрос о будущем: «Мы завтра прочитать эту книгу?». Спрашиваем о факте будущего действия, не о процессе.",
+      "correct": false,
+      "chosen": "be reading",
+      "expected": "read",
+      "explanation": "Вопрос Future Simple: Will + подлежащее + V1? После will смысловой глагол остаётся в первой форме.",
+      "wrongParts": [
+        {
+          "chosen": "be reading",
+          "expected": "read",
+          "why": "Почему «be reading» не подходит: Эта форма передаёт другой смысл или нарушает грамматическую конструкцию."
+        }
+      ]
+    },
+    {
+      "id": "simple-056",
+      "group": "simple",
+      "prompt": "Решение принимается сейчас: «Хорошо, ученики сейчас нарисовать карту». Главное — решение в момент речи.",
+      "correct": false,
+      "chosen": "will be drawing",
+      "expected": "will draw",
+      "explanation": "Решение принято прямо в момент разговора, поэтому подходит will + первая форма глагола. Здесь нет будущей точки отсчёта, к которой действие уже должно закончиться, и мы не описываем процесс.",
+      "wrongParts": [
+        {
+          "chosen": "will be drawing",
+          "expected": "will draw",
+          "why": "Почему «will be drawing» не подходит: Эта форма описывает процесс, а по условию нужен обычный будущий факт, решение или обещание."
+        }
+      ]
+    },
+    {
+      "id": "simple-047",
+      "group": "simple",
+      "prompt": "Уверенность в будущем: «Уверена, что Анна завтра приготовить завтрак». Это прогноз, а не процесс.",
+      "correct": true,
+      "chosen": "will make",
+      "expected": "will make",
+      "explanation": "Для уверенного прогноза о будущем используем will + V1. Завтра указывает на будущее. Нет акцента на процессе в конкретный час.",
+      "wrongParts": []
+    },
+    {
+      "id": "simple-002",
+      "group": "simple",
+      "prompt": "Уверенность в будущем: «Уверена, что я завтра закончить домашнее задание». Это прогноз, а не процесс.",
+      "correct": false,
+      "chosen": "am finishing",
+      "expected": "will finish",
+      "explanation": "Для уверенного прогноза о будущем используем will + V1. Завтра указывает на будущее. Нет акцента на процессе в конкретный час.",
+      "wrongParts": [
+        {
+          "chosen": "am finishing",
+          "expected": "will finish",
+          "why": "Почему «am finishing» не подходит: Эта форма описывает процесс, а по условию нужен обычный будущий факт, решение или обещание."
+        }
+      ]
+    },
+    {
+      "id": "simple-015",
+      "group": "simple",
+      "prompt": "Вопрос о будущем: «Она завтра написать письмо?». Спрашиваем о факте будущего действия, не о процессе.",
+      "correct": true,
+      "chosen": "write",
+      "expected": "write",
+      "explanation": "Вопрос Future Simple: Will + подлежащее + V1? После will смысловой глагол остаётся в первой форме.",
+      "wrongParts": []
+    },
+    {
+      "id": "simple-035",
+      "group": "simple",
+      "prompt": "Вопрос о будущем: «Они завтра помыть посуду?». Спрашиваем о факте будущего действия, не о процессе.",
+      "correct": true,
+      "chosen": "wash",
+      "expected": "wash",
+      "explanation": "Вопрос Future Simple: Will + подлежащее + V1? После will смысловой глагол остаётся в первой форме.",
+      "wrongParts": []
+    },
+    {
+      "id": "simple-028",
+      "group": "simple",
+      "prompt": "Простой прогноз на завтра: «Думаю, мой брат завтра выполнить упражнения». Не нужно подчёркивать длительность.",
+      "correct": true,
+      "chosen": "will do",
+      "expected": "will do",
+      "explanation": "I think вводит обычный прогноз о будущем. Will + V1 сообщает о будущем действии в целом, без фокуса на процессе или результате к сроку.",
+      "wrongParts": []
+    },
+    {
+      "id": "simple-031",
+      "group": "simple",
+      "prompt": "Решение принимается сейчас: «Хорошо, они сейчас помыть посуду». Главное — решение в момент речи.",
+      "correct": true,
+      "chosen": "will wash",
+      "expected": "will wash",
+      "explanation": "Решение принято прямо в момент разговора, поэтому подходит will + первая форма глагола. Здесь нет будущей точки отсчёта, к которой действие уже должно закончиться, и мы не описываем процесс.",
+      "wrongParts": []
+    },
+    {
+      "id": "simple-033",
+      "group": "simple",
+      "prompt": "Простой прогноз на завтра: «Думаю, они завтра помыть посуду». Не нужно подчёркивать длительность.",
+      "correct": true,
+      "chosen": "will wash",
+      "expected": "will wash",
+      "explanation": "I think вводит обычный прогноз о будущем. Will + V1 сообщает о будущем действии в целом, без фокуса на процессе или результате к сроку.",
+      "wrongParts": []
+    },
+    {
+      "id": "simple-050",
+      "group": "simple",
+      "prompt": "Вопрос о будущем: «Анна завтра приготовить завтрак?». Спрашиваем о факте будущего действия, не о процессе.",
+      "correct": true,
+      "chosen": "make",
+      "expected": "make",
+      "explanation": "Вопрос Future Simple: Will + подлежащее + V1? После will смысловой глагол остаётся в первой форме.",
+      "wrongParts": []
+    },
+    {
+      "id": "continuous-004",
+      "group": "continuous",
+      "prompt": "Представь момент в будущем — когда ты позвонишь завтра в семь. В этот момент I будет в процессе действия: делать домашнее задание. Что будет происходить именно тогда?",
+      "correct": false,
+      "chosen": "will be | finished",
+      "expected": "will be | finishing",
+      "explanation": "Мы мысленно переносимся в точку будущего и видим процесс. Поэтому «will be» + глагол с -ing. Именно be — начальная форма глагола to be после will.",
+      "wrongParts": [
+        {
+          "chosen": "finished",
+          "expected": "finishing",
+          "why": "V3 используется с have в Perfect, а не после will be в Continuous."
+        }
+      ]
+    },
+    {
+      "id": "continuous-043",
+      "group": "continuous",
+      "prompt": "Представь момент в будущем — в это время в субботу. В этот момент Dad будет в процессе действия: собирать модель. Что будет происходить именно тогда?",
+      "correct": true,
+      "chosen": "will be building",
+      "expected": "will be building",
+      "explanation": "Указан конкретный будущий момент, и действие в этот момент будет продолжаться. Future Continuous = will be + V-ing. Мы не говорим, что к этому часу всё уже закончено.",
+      "wrongParts": []
+    },
+    {
+      "id": "continuous-016",
+      "group": "continuous",
+      "prompt": "Представь момент в будущем — завтра в шесть часов. В этот момент He будет в процессе действия: убирать комнату. Что будет происходить именно тогда?",
+      "correct": true,
+      "chosen": "will be cleaning",
+      "expected": "will be cleaning",
+      "explanation": "Указан конкретный будущий момент, и действие в этот момент будет продолжаться. Future Continuous = will be + V-ing. Мы не говорим, что к этому часу всё уже закончено.",
+      "wrongParts": []
+    },
+    {
+      "id": "continuous-060",
+      "group": "continuous",
+      "prompt": "Представь момент в будущем — в полдень следующего воскресенья. В этот момент The students будет в процессе действия: рисовать карту. Что будет происходить именно тогда?",
+      "correct": true,
+      "chosen": "will be drawing",
+      "expected": "will be drawing",
+      "explanation": "Указан конкретный будущий момент, и действие в этот момент будет продолжаться. Future Continuous = will be + V-ing. Мы не говорим, что к этому часу всё уже закончено.",
+      "wrongParts": []
+    },
+    {
+      "id": "continuous-033",
+      "group": "continuous",
+      "prompt": "Представь момент в будущем — в это время в субботу. В этот момент They будет в процессе действия: мыть посуду. Что будет происходить именно тогда?",
+      "correct": true,
+      "chosen": "will be washing",
+      "expected": "will be washing",
+      "explanation": "Указан конкретный будущий момент, и действие в этот момент будет продолжаться. Future Continuous = will be + V-ing. Мы не говорим, что к этому часу всё уже закончено.",
+      "wrongParts": []
+    },
+    {
+      "id": "continuous-047",
+      "group": "continuous",
+      "prompt": "Представь момент в будущем — завтра в девять утра. В этот момент Anna будет в процессе действия: готовить завтрак. Что будет происходить именно тогда?",
+      "correct": true,
+      "chosen": "will be | making",
+      "expected": "will be | making",
+      "explanation": "Мы мысленно переносимся в точку будущего и видим процесс. Поэтому «will be» + глагол с -ing. Именно be — начальная форма глагола to be после will.",
+      "wrongParts": []
+    },
+    {
+      "id": "continuous-014",
+      "group": "continuous",
+      "prompt": "Представь момент в будущем — когда ты позвонишь завтра в семь. В этот момент She будет в процессе действия: писать письмо. Что будет происходить именно тогда?",
+      "correct": true,
+      "chosen": "will be | writing",
+      "expected": "will be | writing",
+      "explanation": "Мы мысленно переносимся в точку будущего и видим процесс. Поэтому «will be» + глагол с -ing. Именно be — начальная форма глагола to be после will.",
+      "wrongParts": []
+    },
+    {
+      "id": "continuous-050",
+      "group": "continuous",
+      "prompt": "Представь момент в будущем — в полдень следующего воскресенья. В этот момент Anna будет в процессе действия: готовить завтрак. Что будет происходить именно тогда?",
+      "correct": true,
+      "chosen": "will be making",
+      "expected": "will be making",
+      "explanation": "Указан конкретный будущий момент, и действие в этот момент будет продолжаться. Future Continuous = will be + V-ing. Мы не говорим, что к этому часу всё уже закончено.",
+      "wrongParts": []
+    },
+    {
+      "id": "continuous-035",
+      "group": "continuous",
+      "prompt": "Представь момент в будущем — в полдень следующего воскресенья. В этот момент They будет в процессе действия: мыть посуду. Что будет происходить именно тогда?",
+      "correct": true,
+      "chosen": "will be washing",
+      "expected": "will be washing",
+      "explanation": "Указан конкретный будущий момент, и действие в этот момент будет продолжаться. Future Continuous = will be + V-ing. Мы не говорим, что к этому часу всё уже закончено.",
+      "wrongParts": []
+    },
+    {
+      "id": "continuous-027",
+      "group": "continuous",
+      "prompt": "Представь момент в будущем — завтра в девять утра. В этот момент My brother будет в процессе действия: выполнять упражнения. Что будет происходить именно тогда?",
+      "correct": true,
+      "chosen": "will be | doing",
+      "expected": "will be | doing",
+      "explanation": "Мы мысленно переносимся в точку будущего и видим процесс. Поэтому «will be» + глагол с -ing. Именно be — начальная форма глагола to be после will.",
+      "wrongParts": []
+    },
+    {
+      "id": "continuous-026",
+      "group": "continuous",
+      "prompt": "Представь момент в будущем — завтра в шесть часов. В этот момент My brother будет в процессе действия: выполнять упражнения. Что будет происходить именно тогда?",
+      "correct": true,
+      "chosen": "will be doing",
+      "expected": "will be doing",
+      "explanation": "Указан конкретный будущий момент, и действие в этот момент будет продолжаться. Future Continuous = will be + V-ing. Мы не говорим, что к этому часу всё уже закончено.",
+      "wrongParts": []
+    },
+    {
+      "id": "perfect-038",
+      "group": "perfect",
+      "prompt": "Результат к сроку: Mum уже нарисовать картину до твоего возвращения домой завтра. К указанному будущему моменту действие будет завершено.",
+      "correct": false,
+      "chosen": "had painted",
+      "expected": "will have painted",
+      "explanation": "Главный смысл — готовый результат к будущему сроку (by / before). Поэтому Future Perfect: will have + V3. В конструкции после will стоит have, а затем третья форма смыслового глагола.",
+      "wrongParts": [
+        {
+          "chosen": "had painted",
+          "expected": "will have painted",
+          "why": "Почему «had painted» не подходит: Had + V3 — Past Perfect, результат к моменту в прошлом. Здесь срок ещё в будущем."
+        }
+      ]
+    },
+    {
+      "id": "perfect-016",
+      "group": "perfect",
+      "prompt": "Результат к сроку: He уже убрать комнату к шести часам завтра. К указанному будущему моменту действие будет завершено.",
+      "correct": true,
+      "chosen": "will have cleaned",
+      "expected": "will have cleaned",
+      "explanation": "Главный смысл — готовый результат к будущему сроку (by / before). Поэтому Future Perfect: will have + V3. В конструкции после will стоит have, а затем третья форма смыслового глагола.",
+      "wrongParts": []
+    },
+    {
+      "id": "perfect-049",
+      "group": "perfect",
+      "prompt": "Результат к сроку: Anna уже приготовить завтрак к концу следующей недели. К указанному будущему моменту действие будет завершено.",
+      "correct": true,
+      "chosen": "will have | made",
+      "expected": "will have | made",
+      "explanation": "Будущий ориентир задаёт срок завершения, значит Future Perfect. В нём обязательно две части: will have + третья форма глагола (V3).",
+      "wrongParts": []
+    },
+    {
+      "id": "perfect-043",
+      "group": "perfect",
+      "prompt": "Результат к сроку: Dad уже собрать модель до твоего возвращения домой завтра. К указанному будущему моменту действие будет завершено.",
+      "correct": true,
+      "chosen": "will have built",
+      "expected": "will have built",
+      "explanation": "Главный смысл — готовый результат к будущему сроку (by / before). Поэтому Future Perfect: will have + V3. В конструкции после will стоит have, а затем третья форма смыслового глагола.",
+      "wrongParts": []
+    },
+    {
+      "id": "perfect-055",
+      "group": "perfect",
+      "prompt": "Результат к сроку: Tom уже выучить эти слова до начала завтрашнего урока. К указанному будущему моменту действие будет завершено.",
+      "correct": true,
+      "chosen": "will have learned",
+      "expected": "will have learned",
+      "explanation": "Главный смысл — готовый результат к будущему сроку (by / before). Поэтому Future Perfect: will have + V3. В конструкции после will стоит have, а затем третья форма смыслового глагола.",
+      "wrongParts": []
+    },
+    {
+      "id": "perfect-059",
+      "group": "perfect",
+      "prompt": "Результат к сроку: The students уже нарисовать карту к концу следующей недели. К указанному будущему моменту действие будет завершено.",
+      "correct": true,
+      "chosen": "will have | drawn",
+      "expected": "will have | drawn",
+      "explanation": "Будущий ориентир задаёт срок завершения, значит Future Perfect. В нём обязательно две части: will have + третья форма глагола (V3).",
+      "wrongParts": []
+    },
+    {
+      "id": "perfect-053",
+      "group": "perfect",
+      "prompt": "Результат к сроку: Tom уже выучить эти слова до твоего возвращения домой завтра. К указанному будущему моменту действие будет завершено.",
+      "correct": true,
+      "chosen": "will have learned",
+      "expected": "will have learned",
+      "explanation": "Главный смысл — готовый результат к будущему сроку (by / before). Поэтому Future Perfect: will have + V3. В конструкции после will стоит have, а затем третья форма смыслового глагола.",
+      "wrongParts": []
+    },
+    {
+      "id": "perfect-057",
+      "group": "perfect",
+      "prompt": "Результат к сроку: The students уже нарисовать карту к пятнице. К указанному будущему моменту действие будет завершено.",
+      "correct": true,
+      "chosen": "will have | drawn",
+      "expected": "will have | drawn",
+      "explanation": "Будущий ориентир задаёт срок завершения, значит Future Perfect. В нём обязательно две части: will have + третья форма глагола (V3).",
+      "wrongParts": []
+    },
+    {
+      "id": "perfect-050",
+      "group": "perfect",
+      "prompt": "Результат к сроку: Anna уже приготовить завтрак до начала завтрашнего урока. К указанному будущему моменту действие будет завершено.",
+      "correct": true,
+      "chosen": "will have made",
+      "expected": "will have made",
+      "explanation": "Главный смысл — готовый результат к будущему сроку (by / before). Поэтому Future Perfect: will have + V3. В конструкции после will стоит have, а затем третья форма смыслового глагола.",
+      "wrongParts": []
+    },
+    {
+      "id": "perfect-033",
+      "group": "perfect",
+      "prompt": "Результат к сроку: They уже помыть посуду до твоего возвращения домой завтра. К указанному будущему моменту действие будет завершено.",
+      "correct": true,
+      "chosen": "will have washed",
+      "expected": "will have washed",
+      "explanation": "Главный смысл — готовый результат к будущему сроку (by / before). Поэтому Future Perfect: will have + V3. В конструкции после will стоит have, а затем третья форма смыслового глагола.",
+      "wrongParts": []
+    },
+    {
+      "id": "perfect-002",
+      "group": "perfect",
+      "prompt": "Результат к сроку: I уже закончить домашнее задание к пятнице. К указанному будущему моменту действие будет завершено.",
+      "correct": true,
+      "chosen": "will have | finished",
+      "expected": "will have | finished",
+      "explanation": "Будущий ориентир задаёт срок завершения, значит Future Perfect. В нём обязательно две части: will have + третья форма глагола (V3).",
+      "wrongParts": []
+    },
+    {
+      "id": "perfect_cont-041",
+      "group": "perfect_cont",
+      "prompt": "Продолжительность до будущего момента: Dad будет собирать модель уже два часа к шести часам завтра; действие к этому моменту ещё продолжается. Нам важно СКОЛЬКО оно длится.",
+      "correct": true,
+      "chosen": "will have been building",
+      "expected": "will have been building",
+      "explanation": "Указана длительность (for ...) ДО будущего момента (by/when). Значит Future Perfect Continuous: will have been + V-ing. Процесс начался раньше и будет длиться к выбранной точке будущего.",
+      "wrongParts": []
+    },
+    {
+      "id": "perfect_cont-032",
+      "group": "perfect_cont",
+      "prompt": "Продолжительность до будущего момента: They будет мыть посуду уже три часа к тому времени, когда завтра придёт мама; действие к этому моменту ещё продолжается. Нам важно СКОЛЬКО оно длится.",
+      "correct": true,
+      "chosen": "will have | been | washing",
+      "expected": "will have | been | washing",
+      "explanation": "Future Perfect Continuous складывается из will + have + been + V-ing. Will указывает на будущее, have been создаёт Perfect Continuous, а -ing показывает длительный процесс.",
+      "wrongParts": []
+    },
+    {
+      "id": "perfect_cont-029",
+      "group": "perfect_cont",
+      "prompt": "Продолжительность до будущего момента: My brother будет выполнять упражнения уже четыре часа к пяти завтра; действие к этому моменту ещё продолжается. Нам важно СКОЛЬКО оно длится.",
+      "correct": true,
+      "chosen": "will have | been | doing",
+      "expected": "will have | been | doing",
+      "explanation": "Future Perfect Continuous складывается из will + have + been + V-ing. Will указывает на будущее, have been создаёт Perfect Continuous, а -ing показывает длительный процесс.",
+      "wrongParts": []
+    },
+    {
+      "id": "perfect_cont-056",
+      "group": "perfect_cont",
+      "prompt": "Продолжительность до будущего момента: The students будет рисовать карту уже два часа к шести часам завтра; действие к этому моменту ещё продолжается. Нам важно СКОЛЬКО оно длится.",
+      "correct": true,
+      "chosen": "will have been drawing",
+      "expected": "will have been drawing",
+      "explanation": "Указана длительность (for ...) ДО будущего момента (by/when). Значит Future Perfect Continuous: will have been + V-ing. Процесс начался раньше и будет длиться к выбранной точке будущего.",
+      "wrongParts": []
+    },
+    {
+      "id": "perfect_cont-028",
+      "group": "perfect_cont",
+      "prompt": "Продолжительность до будущего момента: My brother будет выполнять упражнения уже сорок минут к восьми сегодня вечером; действие к этому моменту ещё продолжается. Нам важно СКОЛЬКО оно длится.",
+      "correct": true,
+      "chosen": "will have been doing",
+      "expected": "will have been doing",
+      "explanation": "Указана длительность (for ...) ДО будущего момента (by/when). Значит Future Perfect Continuous: will have been + V-ing. Процесс начался раньше и будет длиться к выбранной точке будущего.",
+      "wrongParts": []
+    },
+    {
+      "id": "perfect_cont-046",
+      "group": "perfect_cont",
+      "prompt": "Продолжительность до будущего момента: Anna будет готовить завтрак уже два часа к шести часам завтра; действие к этому моменту ещё продолжается. Нам важно СКОЛЬКО оно длится.",
+      "correct": true,
+      "chosen": "will have been preparing",
+      "expected": "will have been preparing",
+      "explanation": "Указана длительность (for ...) ДО будущего момента (by/when). Значит Future Perfect Continuous: will have been + V-ing. Процесс начался раньше и будет длиться к выбранной точке будущего.",
+      "wrongParts": []
+    },
+    {
+      "id": "perfect_cont-051",
+      "group": "perfect_cont",
+      "prompt": "Продолжительность до будущего момента: Tom будет учить эти слова уже два часа к шести часам завтра; действие к этому моменту ещё продолжается. Нам важно СКОЛЬКО оно длится.",
+      "correct": true,
+      "chosen": "will have been learning",
+      "expected": "will have been learning",
+      "explanation": "Указана длительность (for ...) ДО будущего момента (by/when). Значит Future Perfect Continuous: will have been + V-ing. Процесс начался раньше и будет длиться к выбранной точке будущего.",
+      "wrongParts": []
+    },
+    {
+      "id": "perfect_cont-047",
+      "group": "perfect_cont",
+      "prompt": "Продолжительность до будущего момента: Anna будет готовить завтрак уже три часа к тому времени, когда завтра придёт мама; действие к этому моменту ещё продолжается. Нам важно СКОЛЬКО оно длится.",
+      "correct": true,
+      "chosen": "will have | been | preparing",
+      "expected": "will have | been | preparing",
+      "explanation": "Future Perfect Continuous складывается из will + have + been + V-ing. Will указывает на будущее, have been создаёт Perfect Continuous, а -ing показывает длительный процесс.",
+      "wrongParts": []
+    },
+    {
+      "id": "perfect_cont-042",
+      "group": "perfect_cont",
+      "prompt": "Продолжительность до будущего момента: Dad будет собирать модель уже три часа к тому времени, когда завтра придёт мама; действие к этому моменту ещё продолжается. Нам важно СКОЛЬКО оно длится.",
+      "correct": true,
+      "chosen": "will have | been | building",
+      "expected": "will have | been | building",
+      "explanation": "Future Perfect Continuous складывается из will + have + been + V-ing. Will указывает на будущее, have been создаёт Perfect Continuous, а -ing показывает длительный процесс.",
+      "wrongParts": []
+    },
+    {
+      "id": "perfect_cont-011",
+      "group": "perfect_cont",
+      "prompt": "Продолжительность до будущего момента: She будет писать письмо уже два часа к шести часам завтра; действие к этому моменту ещё продолжается. Нам важно СКОЛЬКО оно длится.",
+      "correct": true,
+      "chosen": "will have been writing",
+      "expected": "will have been writing",
+      "explanation": "Указана длительность (for ...) ДО будущего момента (by/when). Значит Future Perfect Continuous: will have been + V-ing. Процесс начался раньше и будет длиться к выбранной точке будущего.",
+      "wrongParts": []
+    },
+    {
+      "id": "perfect_cont-053",
+      "group": "perfect_cont",
+      "prompt": "Продолжительность до будущего момента: Tom будет учить эти слова уже сорок минут к восьми сегодня вечером; действие к этому моменту ещё продолжается. Нам важно СКОЛЬКО оно длится.",
+      "correct": true,
+      "chosen": "will have been learning",
+      "expected": "will have been learning",
+      "explanation": "Указана длительность (for ...) ДО будущего момента (by/when). Значит Future Perfect Continuous: will have been + V-ing. Процесс начался раньше и будет длиться к выбранной точке будущего.",
+      "wrongParts": []
+    },
+    {
+      "id": "mixed-038",
+      "group": "mixed",
+      "prompt": "Официальное расписание на завтра: «The library открывается в 10:00». Выбираем обычную форму расписания.",
+      "correct": true,
+      "chosen": "opens",
+      "expected": "opens",
+      "explanation": "Расписания транспорта, уроков, фильмов обычно выражаются Present Simple даже если событие будет завтра. Подлежащее в третьем лице единственного числа, поэтому к глаголу добавляется -s/-es.",
+      "wrongParts": []
+    },
+    {
+      "id": "mixed-059",
+      "group": "mixed",
+      "prompt": "Два будущих действия: «Я позвоню тебе, когда она закончит работу». После when в значении будущего времени выбери правильную форму.",
+      "correct": true,
+      "chosen": "finishes",
+      "expected": "finishes",
+      "explanation": "После when для будущего события обычно стоит Present Simple, а в главной части — will + V1. Это правило относится к придаточным времени: when / as soon as / after / before.",
+      "wrongParts": []
+    },
+    {
+      "id": "mixed-049",
+      "group": "mixed",
+      "prompt": "Два будущих действия: «Я позвоню тебе, когда она откроет дверь». После when в значении будущего времени выбери правильную форму.",
+      "correct": true,
+      "chosen": "opens",
+      "expected": "opens",
+      "explanation": "После when для будущего события обычно стоит Present Simple, а в главной части — will + V1. Это правило относится к придаточным времени: when / as soon as / after / before.",
+      "wrongParts": []
+    },
+    {
+      "id": "mixed-034",
+      "group": "mixed",
+      "prompt": "Два будущих действия: «Я позвоню тебе, когда она увидит Анну». После when в значении будущего времени выбери правильную форму.",
+      "correct": true,
+      "chosen": "sees",
+      "expected": "sees",
+      "explanation": "После when для будущего события обычно стоит Present Simple, а в главной части — will + V1. Это правило относится к придаточным времени: when / as soon as / after / before.",
+      "wrongParts": []
+    },
+    {
+      "id": "mixed-055",
+      "group": "mixed",
+      "prompt": "Условие в будущем: «Я помогу тебе, если он завтра remember». В части после if нужна форма по правилу реального условия.",
+      "correct": false,
+      "chosen": "is remembering",
+      "expected": "remembers",
+      "explanation": "Реальное будущее условие: в главной части will + V1, после if — Present Simple. Хотя по-русски в обеих частях будущее, в английском после if обычно не ставят will.",
+      "wrongParts": [
+        {
+          "chosen": "is remembering",
+          "expected": "remembers",
+          "why": "Почему «is remembering» не подходит: Present Continuous здесь не нужен: условие описывает событие как факт, а не процесс."
+        }
+      ]
+    },
+    {
+      "id": "mixed-046",
+      "group": "mixed",
+      "prompt": "План уже принят: «Anna завтра пойдёт за покупками». Выбираем форму для намерения, которое существовало до разговора.",
+      "correct": true,
+      "chosen": "is going to",
+      "expected": "is going to",
+      "explanation": "Здесь именно заранее принятое намерение: am/is/are going to + начальная форма. Форма be зависит от подлежащего: I am, she is, we are.",
+      "wrongParts": []
+    },
+    {
+      "id": "mixed-008",
+      "group": "mixed",
+      "prompt": "Официальное расписание на завтра: «The train прибывает в 10:00». Выбираем обычную форму расписания.",
+      "correct": true,
+      "chosen": "arrives",
+      "expected": "arrives",
+      "explanation": "Расписания транспорта, уроков, фильмов обычно выражаются Present Simple даже если событие будет завтра. Подлежащее в третьем лице единственного числа, поэтому к глаголу добавляется -s/-es.",
+      "wrongParts": []
+    },
+    {
+      "id": "mixed-039",
+      "group": "mixed",
+      "prompt": "Два будущих действия: «Я позвоню тебе, когда она проснётся». После when в значении будущего времени выбери правильную форму.",
+      "correct": true,
+      "chosen": "wakes",
+      "expected": "wakes",
+      "explanation": "После when для будущего события обычно стоит Present Simple, а в главной части — will + V1. Это правило относится к придаточным времени: when / as soon as / after / before.",
+      "wrongParts": []
+    },
+    {
+      "id": "mixed-048",
+      "group": "mixed",
+      "prompt": "Официальное расписание на завтра: «The concert начинается в 10:00». Выбираем обычную форму расписания.",
+      "correct": false,
+      "chosen": "is beginning",
+      "expected": "begins",
+      "explanation": "Расписания транспорта, уроков, фильмов обычно выражаются Present Simple даже если событие будет завтра. Подлежащее в третьем лице единственного числа, поэтому к глаголу добавляется -s/-es.",
+      "wrongParts": [
+        {
+          "chosen": "is beginning",
+          "expected": "begins",
+          "why": "Почему «is beginning» не подходит: Для устойчивого расписания обычно выбираем Present Simple, а не процесс прямо сейчас."
+        }
+      ]
+    },
+    {
+      "id": "mixed-057",
+      "group": "mixed",
+      "prompt": "Личная договорённость уже есть: «The children завтра в пять позвонит учителю». Выбираем Present Continuous для запланированной встречи/действия.",
+      "correct": true,
+      "chosen": "are calling",
+      "expected": "are calling",
+      "explanation": "Для заранее согласованного личного плана часто используется Present Continuous, хотя действие произойдёт в будущем. Форма: am/is/are + -ing, временное слово tomorrow показывает будущий смысл.",
+      "wrongParts": []
+    }
+  ]
+}
