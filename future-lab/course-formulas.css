@@ -23,6 +23,7 @@
 .formula-example .ru{display:block;color:#43576e;font-size:15.5px;margin-top:4px}
 .formula-why{border-left:4px solid #298776;background:#eaf7f2;border-radius:0 9px 9px 0;padding:11px 12px;margin:12px 0;line-height:1.6}
 .formula-tip{background:#fff8e9;border-left:3px solid #d9a140;border-radius:0 8px 8px 0;padding:10px 12px;margin:9px 0;line-height:1.6}
+.q.acceptable-alternative{border-color:#78bb9f}.q.acceptable-alternative .feedback{background:#eaf8f2}
 @media(max-width:650px){
  .glossary-grid{grid-template-columns:1fr}
  .glossary-item{padding:10px}

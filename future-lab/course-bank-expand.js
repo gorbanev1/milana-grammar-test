@@ -65,7 +65,7 @@ const orderPresent=[
  v=>['I have been '+v.ing+' '+v.obj+' since morning.','С утра я '+v.now+'.','Have been + V-ing + since выражает длительность.'],
  v=>['Does she '+v.v+' '+v.obj+' on Saturdays?','Она по субботам '+v.ru+'?','Does + she + V1 — вопрос про привычку.'],
  v=>['She is '+v.ing+' '+v.obj+' at the moment.','Прямо сейчас она '+v.thirdRu+'.','Is + V-ing — процесс сейчас.'],
- v=>['I have already '+v.v3+' '+v.obj+'.','Я уже '+v.done+'.','Have + V3 показывает результат сейчас.'],
+ v=>['I have already '+v.v3+' '+v.obj+'.','Я уже '+v.done+'.','Present Perfect: подлежащее + have + V3. Already может стоять между have и V3 или в конце всего предложения: I have '+v.v3+' '+v.obj+' already. Оба порядка грамматически возможны; точку ставим в самый конец.'],
  v=>['I do not '+v.v+' '+v.obj+' every day.','Я не каждый день '+v.ru+'.','Do not + V1: отрицание привычки.'],
  v=>['Have you been '+v.ing+' '+v.obj+' all morning?','Ты всё утро '+v.ru+'?','Have + you + been + V-ing — вопрос про длительность.']
 ];

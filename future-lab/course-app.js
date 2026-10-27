@@ -40,6 +40,24 @@ function full(q,vals=q.ans){
  if(q.kind==='contrast')return q.pair.map((p,i)=>(p.prefix+String(vals[i]||'')+p.suffix).replace(/\s{2,}/g,' ')).join('\n');
  return q.correct;
 }
+// Keep the final full stop or question mark at the end, not glued to a movable chip.
+function orderSentence(q,indices){
+ const words=q.words||[],end=String(words.at(-1)||'').match(/[.!?]$/)?.[0]||'';
+ const seq=(indices||[]).map(i=>{
+  const word=String(words[i]||'');
+  return i===words.length-1&&end?word.slice(0,-1):word;
+ });
+ const phrase=seq.join(' ').replace(/\s+([,;:.!?])/g,'$1');
+ return phrase+((indices||[]).length===words.length?end:'');
+}
+function correctOrder(q,indices){
+ if(!q||q.kind!=='order'||!Array.isArray(indices)||indices.length!==q.words.length)return false;
+ const base=orderSentence(q,q.words.map((_,i)=>i)),attempt=orderSentence(q,indices);
+ if(attempt===base)return true;
+ // Already may naturally stand before V3 OR at the end of this Present Perfect clause.
+ const m=base.match(/^(I have) already (\S+) (.+)\.$/);
+ return !!m&&attempt===m[1]+' '+m[2]+' '+m[3]+' already.';
+}
 function grammarChoice(chosen,correct){
  if(/(?:did|does|do)\s*$/i.test(chosen))return 'После do/does/did смысловой глагол употребляется в V1: вспомогательный глагол уже содержит нужную грамматическую информацию.';
  if(/\b(?:had been|have been|has been|will have been)\b/.test(chosen))return 'Конструкция Perfect Continuous подчёркивает длительность процесса до некоторой точки отсчёта. Для неё нужна вся цепочка вспомогательных глаголов и V-ing.';
@@ -49,12 +67,16 @@ function grammarChoice(chosen,correct){
  return 'Сначала проверь временную точку отсчёта и смысловую роль предложения. Затем проверь форму основного глагола: V1, V2, V3 или -ing.';
 }
 function notes(q,e){
- const ok=!!e.correct,correct=full(q),chosen=q.kind==='order'?(e.order||[]).map(i=>q.words[i]).join(' '):full(q,e.values||[]);
- let out='<div class="feedback"><b>'+(ok?'✅ Правильно — почему?':'🔎 Разбор: что нужно изменить')+'</b>';
+ const ok=!!e.correct,correct=full(q),chosen=q.kind==='order'?orderSentence(q,e.order||[]):full(q,e.values||[]);
+ const oldValid=q.kind==='order'&&!ok&&correctOrder(q,e.order||[]);
+ let out='<div class="feedback"><b>'+(oldValid?'✅ Твой вариант тоже грамматически правильный!':ok?'✅ Правильно — почему?':'🔎 Разбор: что нужно изменить')+'</b>';
  out+='<p><b>Правильное предложение целиком:</b><span class="en">'+esc(correct).replace(/\n/g,'<br>')+'</span></p>';
  if(q.kind==='contrast'){out+='<p><b>Полный перевод обеих частей:</b></p>'+q.translations.map((x,i)=>'<p>'+(i+1)+'. '+esc(x)+'</p>').join('')}
  else out+='<p class="translation"><b>Перевод:</b> '+esc(q.translation||q.ru)+'</p>';
- if(!ok){
+ if(oldValid){
+  out+='<div class="formula-why"><b>Ошибки в грамматике здесь нет.</b> Already можно ставить после have перед V3 или в конце предложения: <b>'+esc(correct)+'</b> / <b>'+esc(chosen)+'</b>. Оба варианта допустимы, хотя уже в конце фразы иногда звучит чуть выразительнее. Точка теперь добавляется автоматически в конец фразы. Прошлая оценка сохранена без пересчёта.</div>';
+ }
+ if(!ok&&!oldValid){
   out+='<div class="error"><b>Твой выбранный вариант целиком:</b><span class="en">'+esc(chosen).replace(/\n/g,'<br>')+'</span></div>';
   if(q.kind!=='order')q.ans.forEach((correct,i)=>{
    const selected=e.values?.[i];if(selected===correct)return;
@@ -81,10 +103,10 @@ function renderQuestion(q,n){
  else{
   if(!Array.isArray(e.order))e.order=[];
   const used=new Set(e.order),unused=q.words.map((_,i)=>i).filter(i=>!used.has(i));
-  const chip=(idx,side)=>'<button type="button" class="token" '+(e.checked?'disabled':'')+' onclick="moveWord(\''+q.id+'\','+idx+',\''+side+'\')">'+esc(q.words[idx])+'</button>';
-  body='<p class="muted">Нажимай на слова по порядку. Нажатие на выбранное слово возвращает его назад.</p><div class="tokens">'+e.order.map(i=>chip(i,'out')).join('')+'</div><div class="tokens">'+unused.map(i=>chip(i,'in')).join('')+'</div>';
+  const chip=(idx,side)=>'<button type="button" class="token" '+(e.checked?'disabled':'')+' onclick="moveWord(\''+q.id+'\','+idx+',\''+side+'\')">'+esc(idx===q.words.length-1?String(q.words[idx]).replace(/[.!?]$/,''):q.words[idx])+'</button>';
+  body='<p class="muted">Нажимай на слова по порядку. Точка или вопросительный знак ставятся автоматически в конце. Нажатие на выбранное слово возвращает его назад.</p><div class="tokens">'+e.order.map(i=>chip(i,'out')).join('')+'</div><div class="tokens">'+unused.map(i=>chip(i,'in')).join('')+'</div><p class="muted"><b>Собранное предложение:</b> '+esc(orderSentence(q,e.order))+'</p>';
  }
- return '<article class="q '+(e.checked?'done ':'')+(e.checked&&!e.correct?'bad':'')+'" id="q-'+q.id+'"><div class="qid">Задание '+n+' из '+TOTAL+' · '+(q.group==='order'?'порядок слов':q.group==='contrast'?'сопоставление двух ситуаций':q.group)+'</div>'+
+ return '<article class="q '+(e.checked?'done ':'')+(e.checked&&!e.correct?(q.kind==='order'&&correctOrder(q,e.order||[])?'bad acceptable-alternative':'bad'):'')+'" id="q-'+q.id+'"><div class="qid">Задание '+n+' из '+TOTAL+' · '+(q.group==='order'?'порядок слов':q.group==='contrast'?'сопоставление двух ситуаций':q.group)+'</div>'+
  '<div class="prompt">'+esc(q.ru)+'</div>'+body+
  '<button class="btn primary" '+(e.checked?'disabled':'')+' onclick="check(\''+q.id+'\')">'+(e.checked?'Проверено ✓':'Проверить')+'</button>'+
  (e.checked?notes(q,e):'')+'</article>';
@@ -148,7 +170,7 @@ function showPractice(){
 }
 function checkedAnswer(id){
  const q=byId[id],e=entry(id);if(!q||e.checked)return;
- if(q.kind==='order'){if(e.order.length!==q.words.length){alert('Сначала расставь все слова.');return;}e.correct=e.order.every((x,i)=>x===i)}
+ if(q.kind==='order'){if(e.order.length!==q.words.length){alert('Сначала расставь все слова.');return;}e.correct=correctOrder(q,e.order)}
  else {if(!e.values||e.values.length!==q.ans.length||e.values.some(v=>!v)){alert('Выбери вариант для каждого пропуска.');return;}e.correct=e.values.every((v,i)=>v===q.ans[i]);}
  e.checked=true;e.checkedAt=new Date().toISOString();
  if(numDone()===TOTAL&&!cur().archived){
@@ -191,7 +213,7 @@ function storedWriter(){
  return writer;
 }
 function payload(q,e){
- const chosen=q.kind==='order'?(e.order||[]).map(i=>q.words[i]).join(' '):full(q,e.values);
+ const chosen=q.kind==='order'?orderSentence(q,e.order||[]):full(q,e.values);
  const expected=full(q);
  const wrongParts=(q.kind==='order'?[]:q.ans.map((ans,i)=>({chosen:e.values[i],expected:ans,why:q.wrongRule||q.explain})).filter((p,i)=>e.values[i]!==q.ans[i]));
  return {id:q.id,group:q.group,prompt:q.ru,correct:!!e.correct,chosen,expected,explanation:q.explain+'\nПОЛНОЕ ПРАВИЛЬНОЕ ПРЕДЛОЖЕНИЕ: '+expected+'\nПЕРЕВОД: '+(q.translation||'')+'\nСРАВНЕНИЕ: '+(q.contrasts||[]).map(x=>x.en+' — '+x.ru).join(' / '),wrongParts,
