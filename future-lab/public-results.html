@@ -7,12 +7,12 @@
 </style></head><body><div class="wrap"><header><h1>Милана · Общие результаты</h1><p>История проходов Future Lab. Баллы, ответы, ошибки и темы для повторения.</p><span class="tag">Публичный просмотр</span><span class="tag">Данные из JSON на GitHub</span></header>
 <div class="bar"><a class="btn" href="./">← К тесту</a><button class="btn" id="reload">↻ Обновить результаты</button></div>
 <div class="card"><p id="status" class="muted" role="status">Получаю результаты…</p><div class="stats" id="stats" hidden></div></div><div id="runs"></div><div class="card muted tiny">Результаты общедоступны. Записи появляются после автоматической отправки с телефона Миланы и публикации обновлённого JSON-файла. Сам исходный прогресс остаётся в её браузере.</div></div>
-<script src="cloud-config.js"></script><script src="site-nav.js?v=20261027-new"></script><script src="feedback-rich.js?v=20261027-1"></script><script>
+<script src="cloud-config.js"></script><script src="site-nav.js?v=20261029-express1"></script><script src="feedback-rich.js?v=20261027-1"></script><script>
 'use strict';const groupNames={order:'Порядок слов',simple:'Future Simple',continuous:'Future Continuous',perfect:'Future Perfect',perfect_cont:'Future Perfect Continuous',mixed:'Смешанные времена, планы и условия'};
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const api=String(window.MILANA_RESULTS_API||'').replace(/\/+$/,'');
 const filterTrack=new URLSearchParams(location.search).get('track')||'future';
-const trackNames={future:'Future',past:'Past',present:'Present',all:'Все времена',articles:'Артикли',prepositions:'Предлоги'};
+const trackNames={future:'Future',past:'Past',present:'Present',all:'Все времена',express:'Экспресс-тесты',articles:'Артикли',prepositions:'Предлоги'};
 if(trackNames[filterTrack])document.querySelector('h1').textContent='Милана · Общие результаты · '+trackNames[filterTrack];
 const asDate=s=>{try{return new Date(s).toLocaleString('ru-RU')}catch{return String(s)}};
 let lastManifest='',loadingIndex=false;let richIndex={},richPromise=null;

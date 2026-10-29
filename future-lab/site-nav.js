@@ -7,7 +7,7 @@ css.textContent='#milana-site-nav{position:relative;z-index:5;background:#eff5fb
 document.head.appendChild(css);
 const items=[
  ['future','🔵 Future','./'],['past','🟠 Past','courses.html?track=past'],['present','🟢 Present','courses.html?track=present'],
- ['all','🟣 Все времена','courses.html?track=all'],['articles','🟪 Артикли','extra-topics.html#articles'],['prepositions','🟩 Предлоги','extra-topics.html#prepositions']];
+ ['all','🟣 Все времена','courses.html?track=all'],['express','⚡ Экспресс-тесты','courses.html?track=express'],['articles','🟪 Артикли','extra-topics.html#articles'],['prepositions','🟩 Предлоги','extra-topics.html#prepositions']];
 const el=document.createElement('nav');el.id='milana-site-nav';el.setAttribute('aria-label','Разделы Milana Grammar Lab');
 el.innerHTML='<div class="navinner"><b>Grammar Lab</b>'+items.map(([k,title,url])=>'<a data-key="'+k+'" href="'+url+'">'+title+'</a>').join('')+'</div>';
 document.body.insertBefore(el,document.body.firstChild);

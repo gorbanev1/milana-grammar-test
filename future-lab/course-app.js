@@ -3,10 +3,10 @@
 (function(){
 'use strict';
 const track=new URLSearchParams(location.search).get('track')||'past';
-if(!['past','present','all'].includes(track)){location.replace('courses.html?track=past');return;}
-const bank=window.MILANA_COURSE_BANK[track],byId=Object.fromEntries(bank.map(q=>[q.id,q]));
-const names={past:'Past · времена прошлого',present:'Present · времена настоящего',all:'Все времена · смысловые контрасты'};
-const TOTAL=track==='all'?30:60,KEY='milana_'+(track==='all'?'all_tenses':track)+'_course_v1',ACK='milana_cloud_course_ack_'+track+'_v1';
+if(!['past','present','all','express'].includes(track)){location.replace('courses.html?track=past');return;}
+const bank=window.MILANA_COURSE_BANK[track==='express'?'all':track],byId=Object.fromEntries(bank.map(q=>[q.id,q]));
+const names={past:'Past · времена прошлого',present:'Present · времена настоящего',all:'Все времена · смысловые контрасты',express:'Экспресс-тесты · 20 заданий'};
+const TOTAL=track==='express'?20:track==='all'?30:60,KEY='milana_'+(track==='all'?'all_tenses':track)+'_course_v1',ACK='milana_cloud_course_ack_'+track+'_v1';
 const WRITER='milana_future_cloud_writer_v1',API=String(window.MILANA_RESULTS_API||'').replace(/\/+$/,'');
 const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
 const rand=a=>{const s=a.slice();for(let i=s.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[s[i],s[j]]=[s[j],s[i]];}return s;};
@@ -15,6 +15,16 @@ const state=read(KEY,{schema:1,history:[],active:null});
 if(!Array.isArray(state.history))state.history=[];
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){console.error('Не удалось сохранить результат',e)}};
 function pick(){
+ if(track==='express'){
+  // 20-question express: one random lexical variant from each of the 20 contrast concepts.
+  const ids=[];
+  for(let group=0;group<20;group++){
+   const pool=rand(bank.slice(group*5,(group+1)*5));
+   if(pool.length!==5)throw Error('Missing contrast theme '+group);
+   ids.push(pool[0].id);
+  }
+  return rand(ids);
+ }
  if(track==='all'){
   // Every 30-question pass covers all twenty meaning contrasts: ten twice, ten once.
   const ids=[];for(let group=0;group<20;group++){
@@ -141,6 +151,7 @@ function formulaSection(idx){
  ids.map(key=>formulaCard(key,multiple)).join('')+'</div>';
 }
 function showTheory(){
+ if(track==='express')return '<div class="card theory"><h2>⚡ Экспресс-тесты · по 20 заданий</h2><p>Каждый проход: 20 смысловых сравнений Past, Present и Future — по одному заданию из каждой из 20 тем. Случайные примеры выбираются из банка 100 заданий. Это отдельный раздел: другие проходы не затрагиваются.</p><p><b>Как отвечать:</b> в каждом задании сравни две ситуации, выбери подходящую форму для каждой. Задание засчитывается, когда обе формы правильные. После проверки будет полный английский текст, перевод и объяснение.</p><div class="pairs"><div class="pair"><b>Факт или процесс?</b><p>I wrote yesterday. — Я писала вчера. / I was writing at eight. — В восемь я была в процессе письма.</p></div><div class="pair"><b>Результат или длительность?</b><p>I have finished. — Я закончила. / I have been studying for an hour. — Я занимаюсь уже час.</p></div><div class="pair"><b>Будущий момент или срок?</b><p>At eight, I will be studying. — В восемь я буду заниматься. / By eight, I will have finished. — К восьми я уже закончу.</p></div></div><p>Подробная теория и формулы находятся в разделе <a href="courses.html?track=all">«Все времена»</a>.</p><button class="btn primary" onclick="openPane(\'practice\')">К экспресс-тесту →</button></div>';
  const theory=window.MILANA_COURSE_THEORY[track];
  const rows=theory.map((t,i)=>'<section class="card theory"><h2>'+(i+1)+'. '+esc(t.title)+'</h2><div class="highlight"><b>Главная мысль:</b> '+esc(t.idea)+'</div>'+formulaSection(i)+
  (t.signal?'<h3>Когда выбирать</h3><p>'+esc(t.signal)+'</p>':'')+
@@ -149,7 +160,7 @@ function showTheory(){
 }
 function showPractice(){
  let ids=cur().ids;
- if(track!=='all'){
+ if(track!=='all'&&track!=='express'){
  const groups=['order','simple','continuous','perfect','perfect_cont','mixed'];
  let s='<div class="card"><h2>Проход №'+cur().run+'</h2><p class="bankmeta">Проверено '+numDone()+'/'+TOTAL+' · верно с первого раза '+score()+'/'+TOTAL+'.</p>'+
  '<p>Выбор сохраняется сразу, первый проверенный ответ не переписывается. Ни одной кнопки сброса незавершённого прохода.</p>';
@@ -162,10 +173,11 @@ function showPractice(){
  }
  return s;
  }
- let s='<div class="card"><h2>Все времена · проход №'+cur().run+'</h2><p class="bankmeta">Проверено '+numDone()+'/30 · верно '+score()+'/30.</p><p>Это отдельные задания на сравнение двух фраз. Для правильного ответа нужно точно выбрать обе формы и понять, как меняется смысл.</p>';
- if(cur().complete)s+='<p class="ok">✅ Все 30 заданий завершены.</p><button class="btn primary" onclick="newPass()">Новый случайный проход (30 других сочетаний)</button>';
+ let s='<div class="card"><h2>'+esc(names[track])+' · проход №'+cur().run+'</h2><p class="bankmeta">Проверено '+numDone()+'/'+TOTAL+' · верно '+score()+'/'+TOTAL+'.</p><p>'+(track==='express'?'20 сравнений из разных смысловых тем Past, Present и Future. В каждом задании нужно правильно выбрать обе формы.':'Самостоятельный тест на сравнение двух ситуаций. Для правильного ответа нужно точно выбрать обе формы и понять, как меняется смысл.')+'</p>';
+ if(cur().complete)s+='<p class="ok">✅ Все '+TOTAL+' заданий завершены. Результат: '+score()+'/'+TOTAL+'.</p><button class="btn primary" onclick="newPass()">Новый проход · '+TOTAL+' заданий</button> <button class="btn" onclick="openPane(\'history\')">Разбор прохода</button>';
  s+='</div>';
  ids.forEach((id,i)=>s+=renderQuestion(byId[id],i+1));
+ if(cur().complete)s+='<section class="card"><h2>Результат: '+score()+'/'+TOTAL+'</h2><p>Проход сохранён. В истории можно открыть все ответы и разборы. Общие результаты появятся после облачной синхронизации.</p><button class="btn primary" onclick="openPane(\'history\')">Мои проходы</button> <button class="btn" onclick="newPass()">Следующие '+TOTAL+' заданий</button></section>';
  return s;
 }
 function checkedAnswer(id){
@@ -194,7 +206,7 @@ function showHistory(){
  }).join('')+'<details class="historyrow"><summary>Показать все вопросы этого прохода</summary>'+
  h.ids.map(id=>byId[id]?'<div class="historyrow"><p><b>'+esc(byId[id].ru)+'</b></p>'+notes(byId[id],h.entries[id])+'</div>':'').join('')+'</details></details>').join('');
 }
-let selectedPane='theory',syncBusy=false,lastSync=0;
+let selectedPane=track==='express'?'practice':'theory',syncBusy=false,lastSync=0;
 function render(){
  document.querySelectorAll('.tabbtn').forEach((b,i)=>b.classList.toggle('active',['theory','practice','history','public'][i]===selectedPane));
  const target=document.getElementById('content');
