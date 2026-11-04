@@ -106,9 +106,14 @@ for(const frame of frames)for(const v of W){
  if(s1.split('§').length!==2||s2.split('§').length!==2)throw Error('Bad frame '+frame[0]);
  const [p1,z1]=s1.split('§'),[p2,z2]=s2.split('§');
  const i=++count,opts1=getOptions(ans1,v),opts2=getOptions(ans2,v);
+ // Five Before/After Anna questions have multiple grammatically valid readings.
+ // Accept completed action OR ongoing process without forcing an unsupported inference.
+ const alternatives=frame===frames[2]?[[ans1,'had been '+v.ing,'was '+v.ing,v.v2],[ans2,'was '+v.ing]]:null;
  const rot=i%opts1.length;
- B.all.push({id:'all-'+String(i).padStart(3,'0'),track:'all',group:'contrast',kind:'contrast',ru:frame[0]+'. Сопоставь ОБА предложения: в чём разница по смыслу?',
+ B.all.push({id:'all-'+String(i).padStart(3,'0'),track:'all',group:'contrast',kind:'contrast',ru:frame[0]+'. Сопоставь ОБА предложения: в чём разница по смыслу?'+(alternatives?' Здесь возможны разные грамматически правильные ответы: один подчёркивает завершение, другой — процесс; оба варианта засчитываются.':''),
  pair:[{prefix:p1,suffix:z1},{prefix:p2,suffix:z2}],ans:[ans1,ans2],
+ acceptedAnswers:alternatives?alternatives.map(a=>[...new Set(a)]):null,
+ alternativeExplanation:alternatives?'До прихода Анны возможен как уже завершённый факт (Past Perfect / Past Simple), так и процесс (Past Perfect Continuous / Past Continuous). После её прихода возможен завершённый факт (Past Simple) или процесс, происходивший позже (Past Continuous). В исходных предложениях не сказано, что чтение обязательно закончилось; поэтому нельзя объявлять грамматически верный вариант ошибкой.':null,
  options:[{label:'Форма в первом предложении',choices:opts1.slice(rot).concat(opts1.slice(0,rot))},{label:'Форма во втором предложении',choices:opts2.slice(rot).concat(opts2.slice(0,rot))}],
  translations:[ru1,ru2],translation:ru1+' / '+ru2,
  explain:frame[2]+' Сначала найди временной ориентир и реши: факт, процесс, уже готовый результат или длительность. После этого строй вспомогательный и смысловой глаголы.',
