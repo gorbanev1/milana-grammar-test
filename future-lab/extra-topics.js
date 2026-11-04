@@ -248,7 +248,7 @@ function renderPractice(t){
  html+='<details><summary>Как выполнять задания</summary><p>Знак ∅ означает, что в пропуске не нужно никакого слова. Ответ фиксируется после нажатия «Проверить»; свои ошибки можно пересмотреть при следующем входе. Перейти к другому разделу можно в любой момент, ответы останутся на месте.</p></details></section>';
  rows.forEach((q,i)=>{
  const e=state[t][q[0]]||{},ok=e.checked&&e.selected===q[4];
- html+='<div class="q '+(e.checked?'checked ':'')+(e.checked&&!ok?'wrong':'')+'" id="q-'+esc(q[0])+'"><div class="prompt">'+(i+1)+'. '+esc(q[1])+'</div><div class="example"><span class="en">'+esc(q[2])+' _____ '+esc(q[3])+'</span></div>'+options(q,t,e)+
+ html+='<div class="q '+(e.checked?'checked ':'')+(e.checked&&!ok?'wrong':'')+'" id="q-'+esc(q[0])+'"><div class="prompt">'+(i+1)+'. '+esc(q[1]+' ЦЕЛЕВОЙ ПЕРЕВОД: «'+q[5]+'». Выбери форму именно для этой ситуации, а не другого возможного контекста.')+'</div><div class="example"><span class="en">'+esc(q[2])+' _____ '+esc(q[3])+'</span></div>'+options(q,t,e)+
  '<button type="button" '+(e.checked?'disabled':'')+' onclick="checkExtra(\''+esc(t)+'\',\''+esc(q[0])+'\')">'+(e.checked?'Проверено ✓':'Проверить ответ')+'</button>'+
  (e.checked?feedback(q,e):'')+'</div>';
  });

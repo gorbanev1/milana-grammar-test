@@ -4,10 +4,19 @@
 const B=window.MILANA_COURSE_BANK,V=window.MILANA_COURSE_VERBS;
 const G=window.MILANA_COURSE_GRAMMAR;
 function add(track,group,v,i,z){
- const opts=[z.answer,...z.wrong].filter((x,k,a)=>a.indexOf(x)===k);
+ // Avoid offering two forms that can express precisely the same stated outcome.
+ const equivalent=x=>
+   (z.answer==='have '+v.v3 && x===v.v2) ||
+   (z.answer==='had '+v.v3 && x===v.v2) ||
+   (z.answer==='had been '+v.ing && (x===v.v2||x==='was '+v.ing)) ||
+   (z.answer==='will have '+v.v3 && x==='will '+v.v);
+ const opts=[z.answer,...z.wrong].filter((x,k,a)=>a.indexOf(x)===k&&!equivalent(x));
+ const fallback=['has '+v.v3,'have '+v.v3,'was '+v.ing,'had '+v.v3,
+                 'will '+v.v,'is '+v.ing,'will have been '+v.ing,'did '+v.v];
+ for(const candidate of fallback){if(opts.length>=4)break;if(!opts.includes(candidate)&&!equivalent(candidate))opts.push(candidate);}
  const rot=i%opts.length;const choices=opts.slice(rot).concat(opts.slice(0,rot));
  B[track].push({id:track+'-'+group+'-'+String(i).padStart(3,'0'),track,group,kind:'single',
- prefix:z.prefix,suffix:z.suffix,ru:z.prompt,ans:[z.answer],options:[{label:'Выбери форму по смыслу',choices}],translation:z.translation,explain:z.why,
+ prefix:z.prefix,suffix:z.suffix,ru:z.prompt+' ЦЕЛЕВОЙ ПЕРЕВОД: «'+z.translation+'» Именно этот смысл должен передавать ответ, а не другой возможный сценарий.',ans:[z.answer],options:[{label:'Выбери форму по смыслу',choices}],translation:z.translation,explain:z.why,
  contrasts:[{en:z.prefix+z.answer+z.suffix,ru:z.translation},{en:z.contrast,ru:z.contrastRu}],wrongRule:'Смысл задания отличается от ситуаций, где правильна выбранная другая форма. Сравни законченный факт, процесс и более раннее событие.',form:'Определяем смысл, затем выбираем вспомогательные глаголы и форму основного глагола.'});
 }
 const pm=[
@@ -43,7 +52,7 @@ for(const [track,templates] of [['past',pm],['present',prm]]){
 function order(track,sentence,ru,why,number){
  const words=sentence.match(/\S+/g);
  B[track].push({id:track+'-order-'+String(number).padStart(3,'0'),track,group:'order',kind:'order',words,correct:sentence,
- ru,translation:ru,explain:why,contrasts:[{en:sentence,ru},{en:track==='past'?'When I arrived, Anna was reading.':'I am reading now, but I usually read in the evening.',ru:track==='past'?'Когда я пришла, Анна читала.':'Сейчас я читаю, но обычно читаю по вечерам.'}]});
+ ru:'Собери предложение с этим точным смыслом: «'+ru+'». Используй все слова. Не меняй задуманную последовательность событий.',translation:ru,explain:why,contrasts:[{en:sentence,ru},{en:track==='past'?'When I arrived, Anna was reading.':'I am reading now, but I usually read in the evening.',ru:track==='past'?'Когда я пришла, Анна читала.':'Сейчас я читаю, но обычно читаю по вечерам.'}]});
 }
 const orderPast=[
  v=>['Yesterday I '+v.v2+' '+v.obj+'.','Вчера я '+v.done+'.','Прошлое утверждение: подлежащее I + V2 + дополнение.'],
@@ -75,9 +84,9 @@ for(const [track,templates] of [['past',orderPast],['present',orderPresent]]){le
 // Each is instantiated in five realistic lexical settings = 100 unique two-sentence comparisons.
 const W=V.slice(0,5);
 const frames=[
- ['Конкретная дата против результата сейчас',v=>['Yesterday I § '+v.obj+'.',v.v2,'Вчера я '+v.done+'.','I § '+v.obj+' already, so I can rest.','have '+v.v3,'Я уже '+v.done+' и теперь могу отдохнуть.'],'Вчера (Past Simple) — закрытое прошлое; already с результатом сейчас — Present Perfect.'],
- ['Процесс вчера в восемь против законченного дела вчера',v=>['At eight yesterday, I § '+v.obj+'; I was still busy.','was '+v.ing,'Вчера в восемь я '+v.proc+'.','Yesterday I § '+v.obj+' and then rested.',v.v2,'Вчера я '+v.done+' и потом отдохнула.'],'В конкретный момент прошлое действие шло; во второй фразе оно закончилось.'],
- ['Сделала до прихода против после прихода',v=>['Before Anna arrived yesterday, I § '+v.obj+'.','had '+v.v3,'До вчерашнего прихода Анны я уже '+v.done+'.','After Anna arrived, I § '+v.obj+'.',v.v2,'После прихода Анны я '+v.done+'.'],'Had + V3 — раньше другого прошлого. Past Simple — действие после него.'],
+ ['Конкретная дата против результата сейчас',v=>['Yesterday I § '+v.obj+'. I completed that task yesterday and it is no longer on my to-do list.',v.v2,'Вчера я '+v.done+' (закончила дело, не просто была занята процессом).','I § '+v.obj+' already, so I can rest.','have '+v.v3,'Я уже '+v.done+' и теперь могу отдохнуть.'],'Вчера (Past Simple) — закрытое прошлое; already с результатом сейчас — Present Perfect.'],
+ ['Процесс вчера в восемь против законченного дела вчера',v=>['At eight yesterday, I § '+v.obj+'; I was still in the middle of this task.','was '+v.ing,'Вчера в восемь я '+v.proc+' (дело ещё НЕ было закончено).','Yesterday I § '+v.obj+' and finished the task before I rested.',v.v2,'Вчера я '+v.done+' (полностью закончила) и потом отдохнула.'],'В конкретный момент прошлое действие шло; во второй фразе оно закончилось.'],
+ ['Сделала до прихода против после прихода',v=>['By the time Anna arrived yesterday, I § '+v.obj+' already. The whole task was finished before her arrival.','had '+v.v3,'К приходу Анны я уже '+v.done+' (завершила до её прихода).','After Anna arrived, I § '+v.obj+' and completed the whole task that evening.',v.v2,'После прихода Анны я '+v.done+' (начала после её прихода и закончила).'],'Had + V3 — раньше другого прошлого. Past Simple — действие после него.'],
  ['Привычка против процесса в эту секунду',v=>['I usually § '+v.obj+' in the evenings.',v.v,'Обычно по вечерам я '+v.now+'.','Right now I § '+v.obj+'.','am '+v.ing,'Прямо сейчас я '+v.now+'.'],'Usually показывает привычку, right now — процесс.'],
  ['Временная деятельность на этой неделе против обычной привычки',v=>['This week I § '+v.obj+' every evening as a temporary project.','am '+v.ing,'На этой неделе я временно '+v.now+' каждый вечер.','Normally I § '+v.obj+' on weekends.',v.v,'Обычно в выходные я '+v.now+'.'],'Present Continuous может описывать временную ситуацию, а Present Simple — обычный уклад.'],
  ['Решение сейчас против намерения, принятого заранее',v=>['All right, I § '+v.obj+' tomorrow! I have just decided.','will '+v.v,'Ладно, завтра я буду '+v.ru+'! Только что решила.','I § '+v.obj+' tomorrow. I planned it last week.','am going to '+v.v,'Завтра я собираюсь '+v.ru+'. Я запланировала это на прошлой неделе.'],'Will помогает выразить решение в момент разговора, going to — заранее существующий план.'],
@@ -94,11 +103,20 @@ const frames=[
  ['Звонок прервал процесс против звонка после окончания',v=>['When Anna called, I § '+v.obj+'; I was still doing it.','was '+v.ing,'Когда позвонила Анна, я ещё '+v.proc+'.','When Anna called, I § '+v.obj+' already.','had '+v.v3,'Когда позвонила Анна, я уже '+v.done+'.'],'Действие в момент звонка — Past Continuous; готовность ДО звонка — Past Perfect.'],
  ['Будущее после when: в придаточном нет will',v=>['When I § '+v.obj+' tomorrow, I will tell you about it.',v.v,'Когда завтра я займусь тем, чтобы '+v.ru+', то расскажу тебе об этом.','I § '+v.obj+' tomorrow; that is my decision.','will '+v.v,'Завтра я буду '+v.ru+' — я так решила.'],'В придаточном времени after when используется Present Simple, даже если русское предложение о будущем.'],
  ['Реальное условие после if против самостоятельного обещания',v=>['If I § '+v.obj+' tomorrow, I will send you a photo.',v.v,'Если завтра я буду '+v.ru+', то пришлю фото.','I § '+v.obj+' tomorrow. I promise.','will '+v.v,'Завтра я буду '+v.ru+'. Обещаю.'],'В придаточном реального условия после if — Present Simple; в главной части с обещанием — will.'],
- ['Сегодня ещё продолжается против законченного вчера',v=>['So far today, I § '+v.obj+'.','have '+v.v3,'На сегодняшний момент я уже '+v.done+'.','Yesterday, I § '+v.obj+'.',v.v2,'Вчера я '+v.done+'.'],'So far today — незавершённый период с результатом сейчас; yesterday — завершённый прошлый период.']
+ ['Сегодня ещё продолжается против законченного вчера',v=>['So far today, I § '+v.obj+'. The result is ready for me now.','have '+v.v3,'Сегодня я уже '+v.done+' (результат готов сейчас).','Yesterday, I § '+v.obj+' and completed that task before the end of the day.',v.v2,'Вчера я '+v.done+' (законченное дело вчера).'],'So far today — незавершённый период с результатом сейчас; yesterday — завершённый прошлый период.']
 ];
 function getOptions(correct,v){
- const list=[correct,v.v2,v.v,'am '+v.ing,'was '+v.ing,'had '+v.v3,'had been '+v.ing,'have '+v.v3,'have been '+v.ing,'will '+v.v,'will be '+v.ing,'will have '+v.v3,'will have been '+v.ing,'am going to '+v.v];
- return [...new Set([correct,...list])].slice(0,7);
+ const list=[correct,v.v2,v.v,'am '+v.ing,'was '+v.ing,'had '+v.v3,
+ 'had been '+v.ing,'have '+v.v3,'have been '+v.ing,'will '+v.v,
+ 'will be '+v.ing,'will have '+v.v3,'will have been '+v.ing,'am going to '+v.v,
+ 'did '+v.v,'has '+v.v3];
+ const equivalent=x=>
+  (correct==='have '+v.v3 && x===v.v2) ||
+  (correct==='had '+v.v3 && x===v.v2) ||
+  (correct==='had been '+v.ing && (x===v.v2||x==='was '+v.ing)) ||
+  (correct==='will have '+v.v3 && x==='will '+v.v) ||
+  (correct==='will have been '+v.ing && x==='will be '+v.ing);
+ return [...new Set(list)].filter(x=>!equivalent(x)).slice(0,7);
 }
 let count=0;
 for(const frame of frames)for(const v of W){
@@ -106,11 +124,11 @@ for(const frame of frames)for(const v of W){
  if(s1.split('§').length!==2||s2.split('§').length!==2)throw Error('Bad frame '+frame[0]);
  const [p1,z1]=s1.split('§'),[p2,z2]=s2.split('§');
  const i=++count,opts1=getOptions(ans1,v),opts2=getOptions(ans2,v);
- // Five Before/After Anna questions have multiple grammatically valid readings.
- // Accept completed action OR ongoing process without forcing an unsupported inference.
- const alternatives=frame===frames[2]?[[ans1,'had been '+v.ing,'was '+v.ing,v.v2],[ans2,'was '+v.ing]]:null;
+ // In each contrast both precise target meanings are visible before an answer.
+ // Never assume «before/after» alone determines completion versus process.
+ const alternatives=null; // Every contrast now states a precise Russian target; no ambiguous before/after interpretations.
  const rot=i%opts1.length;
- B.all.push({id:'all-'+String(i).padStart(3,'0'),track:'all',group:'contrast',kind:'contrast',ru:frame[0]+'. Сопоставь ОБА предложения: в чём разница по смыслу?'+(alternatives?' Здесь возможны разные грамматически правильные ответы: один подчёркивает завершение, другой — процесс; оба варианта засчитываются.':''),
+ B.all.push({id:'all-'+String(i).padStart(3,'0'),track:'all',group:'contrast',kind:'contrast',ru:frame[0]+'. Ситуация 1: «'+ru1+'» Ситуация 2: «'+ru2+'» Сопоставь оба предложения: выбирай формы строго для этих ДВУХ смыслов. Другой грамматически возможный смысл здесь не подразумевается.',
  pair:[{prefix:p1,suffix:z1},{prefix:p2,suffix:z2}],ans:[ans1,ans2],
  acceptedAnswers:alternatives?alternatives.map(a=>[...new Set(a)]):null,
  alternativeExplanation:alternatives?'До прихода Анны возможен как уже завершённый факт (Past Perfect / Past Simple), так и процесс (Past Perfect Continuous / Past Continuous). После её прихода возможен завершённый факт (Past Simple) или процесс, происходивший позже (Past Continuous). В исходных предложениях не сказано, что чтение обязательно закончилось; поэтому нельзя объявлять грамматически верный вариант ошибкой.':null,

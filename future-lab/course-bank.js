@@ -34,25 +34,36 @@ function variants(correct,v,group){
 function one(track,group,v,number,template){
  const result=template(v);
  const correct=result.answer;
- let choices=[correct,...(result.distractors||variants(correct,v,group))].filter((x,i,a)=>a.indexOf(x)===i).slice(0,4);
+ // Eliminate distractors that can legitimately express the SAME specified meaning
+ // in another English variety or with an equally natural temporal perspective.
+ const semanticallyEquivalent=(candidate)=>
+   (correct==='have '+v.v3 && candidate===v.v2) ||
+   (correct==='had '+v.v3 && candidate===v.v2) ||
+   (correct==='had been '+v.ing && (candidate===v.v2||candidate==='was '+v.ing)) ||
+   (correct==='will have '+v.v3 && candidate==='will '+v.v) ||
+   (correct==='will have been '+v.ing && candidate==='will be '+v.ing) ||
+   ((correct==='will '+v.v||correct==='am going to '+v.v) &&
+     (candidate==='am going to '+v.v||candidate==='will '+v.v) && candidate!==correct);
+ let choices=[correct,...(result.distractors||variants(correct,v,group))]
+   .filter((x,i,a)=>a.indexOf(x)===i&&!semanticallyEquivalent(x)).slice(0,4);
  const extra=['will have been '+v.ing,'have been '+v.ing,'had been '+v.ing,'did not '+v.v,'will not '+v.v,'is '+v.ing,'was '+v.ing,'has '+v.v3,'have '+v.v3,'had '+v.v3,'will '+v.v,'would '+v.v];
- while(choices.length<4){const next=extra.find(x=>!choices.includes(x));if(!next)throw Error('Not enough alternatives '+track+' '+group);choices.push(next);}
+ while(choices.length<4){const next=extra.find(x=>!choices.includes(x)&&!semanticallyEquivalent(x));if(!next)throw Error('Not enough alternatives '+track+' '+group);choices.push(next);}
  const shift=(number*7)%4;choices=choices.slice(shift).concat(choices.slice(0,shift));
- const q={id:track+'-'+group+'-'+String(number).padStart(3,'0'),track,group,kind:'single',prefix:result.prefix,suffix:result.suffix,ru:result.prompt,ans:[correct],options:[{label:'Выбери форму в полном английском предложении',choices}],
+ const q={id:track+'-'+group+'-'+String(number).padStart(3,'0'),track,group,kind:'single',prefix:result.prefix,suffix:result.suffix,ru:result.prompt+' ЦЕЛЕВОЙ СМЫСЛ: «'+result.translation+'» Выбери форму, передающую именно этот смысл. Если другая форма возможна с ДРУГИМ значением, она не является ответом на этот вопрос.',ans:[correct],options:[{label:'Выбери форму в полном английском предложении',choices}],
  translation:result.translation,explain:result.why+' '+grammar[track][group].meaning+' Построение: '+grammar[track][group].form,
  contrasts:[{en:result.prefix+correct+result.suffix,ru:result.translation},{en:grammar[track][group].contrast.split(' / ')[1]?.split(' — ')[0]||'',ru:grammar[track][group].contrast.split(' / ')[1]?.split(' — ')[1]||''}],
  wrongRule:grammar[track][group].meaning+' Сравни грамматические формы в полных предложениях, а не только названия времён.',form:grammar[track][group].form};
  bank[track].push(q);
 }
 const ps=[
- v=>({prefix:'Yesterday I ',suffix:' '+v.obj+'.',answer:v.v2,prompt:'Вчера действие закончилось. Нужен факт с датой, не результат «к сейчас».',translation:'Вчера я '+v.done+'.',why:'Yesterday — конкретный законченный период прошлого.',distractors:['have '+v.v3,'was '+v.ing,'had '+v.v3]}),
- v=>({prefix:'Last Monday I ',suffix:' '+v.obj+'.',answer:v.v2,prompt:'В прошлый понедельник — одна завершённая ситуация.',translation:'В прошлый понедельник я '+v.done+'.',why:'Last Monday отправляет нас в закрытый период прошлого.',distractors:['have '+v.v3,'will '+v.v,'was '+v.ing]}),
- v=>({prefix:'Two days ago, I ',suffix:' '+v.obj+'.',answer:v.v2,prompt:'Два дня назад: прошлое с прямым указанием времени.',translation:'Два дня назад я '+v.done+'.',why:'Ago требует привязки к конкретному прошлому, обычно Past Simple.',distractors:['have '+v.v3,'am '+v.ing,'will have '+v.v3]}),
+ v=>({prefix:'Yesterday I ',suffix:' '+v.obj+'. I completed that task yesterday and moved on to the next one.',answer:v.v2,prompt:'Вчера я ЗАКОНЧИЛА это дело (получила результат). Здесь нужно сообщить о завершённом действии, а не о процессе работы над ним.',translation:'Вчера я '+v.done+'.',why:'Yesterday указывает на прошлый день, но само по себе НЕ запрещает was writing. Здесь выбран Past Simple, потому что условие прямо требует завершённый факт, а не процесс.',distractors:['have '+v.v3,'was '+v.ing,'had '+v.v3]}),
+ v=>({prefix:'Last Monday I ',suffix:' '+v.obj+'. I finished that task on the same day.',answer:v.v2,prompt:'В прошлый понедельник задача была ЗАКОНЧЕНА в тот же день. Сообщи о выполненном деле, а не о том, чем была занята в тот момент.',translation:'В прошлый понедельник я '+v.done+'.',why:'Last Monday отправляет нас в закрытый период прошлого.',distractors:['have '+v.v3,'will '+v.v,'was '+v.ing]}),
+ v=>({prefix:'Two days ago, I ',suffix:' '+v.obj+'. That task was completed two days ago.',answer:v.v2,prompt:'Два дня назад я СДЕЛАЛА это и закончила. Передай завершённый факт, не процесс.',translation:'Два дня назад я '+v.done+'.',why:'Ago требует привязки к конкретному прошлому, обычно Past Simple.',distractors:['have '+v.v3,'am '+v.ing,'will have '+v.v3]}),
  v=>({prefix:'When I was younger, I often ',suffix:' '+v.obj+'.',answer:v.v2,prompt:'Раньше это было привычкой. Сейчас привычка необязательно сохранилась.',translation:'Когда я была моложе, я часто '+v.proc+'.',why:'When I was younger — законченный прошлый период, often — повторение в нём.',distractors:['have '+v.v3,'am '+v.ing,'had been '+v.ing]}),
- v=>({prefix:'Yesterday I ',suffix:' '+v.obj+' and then went for a walk.',answer:v.v2,prompt:'Два события шли последовательно вчера. Что сделала сначала?',translation:'Вчера я '+v.done+', а затем пошла гулять.',why:'And then — последовательность законченных действий, обычно Past Simple.',distractors:['have '+v.v3,'was '+v.ing,'had been '+v.ing]}),
+ v=>({prefix:'Yesterday I ',suffix:' '+v.obj+' from start to finish, and then went for a walk.',answer:v.v2,prompt:'Вчера сначала ПОЛНОСТЬЮ ЗАКОНЧИЛА дело, только после этого пошла гулять. Это цепочка завершённых фактов.',translation:'Вчера я '+v.done+', а затем пошла гулять.',why:'And then — последовательность законченных действий, обычно Past Simple.',distractors:['have '+v.v3,'was '+v.ing,'had been '+v.ing]}),
  v=>({prefix:'I did not ',suffix:' '+v.obj+' yesterday.',answer:v.v,prompt:'Отрицание завершённого прошлого. После did not выбери форму глагола.',translation:'Вчера я не стала '+v.ru+'.',why:'Did уже показывает прошлое; после did not — V1, а не V2.',distractors:[v.v2,v.v3,v.ing]}),
  v=>({prefix:'Did you ',suffix:' '+v.obj+' last night?',answer:v.v,prompt:'Вопрос о прошлом: Did уже обозначает прошлое. Какое слово поставить следом?',translation:'Ты вчера вечером успела '+v.ru+'?',why:'В вопросе Past Simple: Did + подлежащее + V1?',distractors:[v.v2,v.v3,v.ing]}),
- v=>({prefix:'I ',suffix:' '+v.obj+' yesterday morning. That was the only task.',answer:v.v2,prompt:'Утром вчерашнего дня было одно законченное действие.',translation:'Вчера утром я '+v.done+'. Это была единственная задача.',why:'Событие локализовано в прошедшем закрытом периоде.',distractors:['have '+v.v3,'was '+v.ing,'have been '+v.ing]})
+ v=>({prefix:'I ',suffix:' '+v.obj+' yesterday morning. I finished the task before lunchtime.',answer:v.v2,prompt:'Вчера утром я ВЫПОЛНИЛА задание до обеда. Нужен факт о завершении, не кадр из процесса.',translation:'Вчера утром я '+v.done+'. Это была единственная задача.',why:'Событие локализовано в прошедшем закрытом периоде.',distractors:['have '+v.v3,'was '+v.ing,'have been '+v.ing]})
 ];
 const pc=[
  v=>({prefix:'At eight yesterday, I ',suffix:' '+v.obj+'; I was in the middle of it.',answer:'was '+v.ing,prompt:'Вчера в восемь представляем кадр, на котором действие ещё идёт.',translation:'Вчера в восемь я '+v.proc+'; я была в процессе.',why:'At eight yesterday — точка прошлого; важен незавершённый процесс.',distractors:[v.v2,'had '+v.v3,'have '+v.v3]}),
