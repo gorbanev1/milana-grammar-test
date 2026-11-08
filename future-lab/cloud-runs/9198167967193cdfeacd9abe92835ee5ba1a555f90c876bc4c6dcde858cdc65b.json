@@ -1,0 +1,495 @@
+{
+  "schema": 1,
+  "track": "express",
+  "id": "9198167967193cdfeacd9abe92835ee5ba1a555f90c876bc4c6dcde858cdc65b",
+  "runNumber": 1,
+  "started": "2026-11-08T20:31:36.396Z",
+  "finished": "2026-11-08T20:50:59.249Z",
+  "score": 14,
+  "total": 20,
+  "slots": 40,
+  "goodSlots": 28,
+  "questions": [
+    {
+      "id": "all-045",
+      "group": "contrast",
+      "prompt": "Будущая длительность против будущего кадра. Ситуация 1: «К завтрашним восьми я буду рисовать картину уже два часа.» Ситуация 2: «В восемь завтра я буду рисовать картину.» Сопоставь оба предложения: выбирай формы строго для этих ДВУХ смыслов. Другой грамматически возможный смысл здесь не подразумевается.",
+      "correct": true,
+      "chosen": "By eight tomorrow, I will have been painting a picture for two hours.\nAt eight tomorrow, I will be painting a picture.",
+      "expected": "By eight tomorrow, I will have been painting a picture for two hours.\nAt eight tomorrow, I will be painting a picture.",
+      "explanation": "Will have been + -ing измеряет накопленное время; will be + -ing показывает процесс в момент. Сначала найди временной ориентир и реши: факт, процесс, уже готовый результат или длительность. После этого строй вспомогательный и смысловой глаголы.\nПОЛНОЕ ПРАВИЛЬНОЕ ПРЕДЛОЖЕНИЕ: By eight tomorrow, I will have been painting a picture for two hours.\nAt eight tomorrow, I will be painting a picture.\nПЕРЕВОД: К завтрашним восьми я буду рисовать картину уже два часа. / В восемь завтра я буду рисовать картину.\nСРАВНЕНИЕ: By eight tomorrow, I will have been painting a picture for two hours. — К завтрашним восьми я буду рисовать картину уже два часа. / At eight tomorrow, I will be painting a picture. — В восемь завтра я буду рисовать картину.",
+      "wrongParts": [],
+      "fullSentence": "By eight tomorrow, I will have been painting a picture for two hours.\nAt eight tomorrow, I will be painting a picture.",
+      "translation": "К завтрашним восьми я буду рисовать картину уже два часа. / В восемь завтра я буду рисовать картину.",
+      "examples": [
+        {
+          "en": "By eight tomorrow, I will have been painting a picture for two hours.",
+          "ru": "К завтрашним восьми я буду рисовать картину уже два часа."
+        },
+        {
+          "en": "At eight tomorrow, I will be painting a picture.",
+          "ru": "В восемь завтра я буду рисовать картину."
+        }
+      ]
+    },
+    {
+      "id": "all-082",
+      "group": "contrast",
+      "prompt": "Звонок прервал процесс против звонка после окончания. Ситуация 1: «Когда позвонила Анна, я ещё писала письмо.» Ситуация 2: «Когда позвонила Анна, я уже написала письмо.» Сопоставь оба предложения: выбирай формы строго для этих ДВУХ смыслов. Другой грамматически возможный смысл здесь не подразумевается.",
+      "correct": false,
+      "chosen": "When Anna called, I am writing a letter; I was still doing it.\nWhen Anna called, I have written a letter already.",
+      "expected": "When Anna called, I was writing a letter; I was still doing it.\nWhen Anna called, I had written a letter already.",
+      "explanation": "Действие в момент звонка — Past Continuous; готовность ДО звонка — Past Perfect. Сначала найди временной ориентир и реши: факт, процесс, уже готовый результат или длительность. После этого строй вспомогательный и смысловой глаголы.\nПОЛНОЕ ПРАВИЛЬНОЕ ПРЕДЛОЖЕНИЕ: When Anna called, I was writing a letter; I was still doing it.\nWhen Anna called, I had written a letter already.\nПЕРЕВОД: Когда позвонила Анна, я ещё писала письмо. / Когда позвонила Анна, я уже написала письмо.\nСРАВНЕНИЕ: When Anna called, I was writing a letter; I was still doing it. — Когда позвонила Анна, я ещё писала письмо. / When Anna called, I had written a letter already. — Когда позвонила Анна, я уже написала письмо.",
+      "wrongParts": [
+        {
+          "chosen": "am writing",
+          "expected": "was writing",
+          "why": "Действие в момент звонка — Past Continuous; готовность ДО звонка — Past Perfect."
+        },
+        {
+          "chosen": "have written",
+          "expected": "had written",
+          "why": "Действие в момент звонка — Past Continuous; готовность ДО звонка — Past Perfect."
+        }
+      ],
+      "fullSentence": "When Anna called, I was writing a letter; I was still doing it.\nWhen Anna called, I had written a letter already.",
+      "translation": "Когда позвонила Анна, я ещё писала письмо. / Когда позвонила Анна, я уже написала письмо.",
+      "examples": [
+        {
+          "en": "When Anna called, I was writing a letter; I was still doing it.",
+          "ru": "Когда позвонила Анна, я ещё писала письмо."
+        },
+        {
+          "en": "When Anna called, I had written a letter already.",
+          "ru": "Когда позвонила Анна, я уже написала письмо."
+        }
+      ]
+    },
+    {
+      "id": "all-019",
+      "group": "contrast",
+      "prompt": "Привычка против процесса в эту секунду. Ситуация 1: «Обычно по вечерам я готовлю ужин.» Ситуация 2: «Прямо сейчас я готовлю ужин.» Сопоставь оба предложения: выбирай формы строго для этих ДВУХ смыслов. Другой грамматически возможный смысл здесь не подразумевается.",
+      "correct": true,
+      "chosen": "I usually cook dinner in the evenings.\nRight now I am cooking dinner.",
+      "expected": "I usually cook dinner in the evenings.\nRight now I am cooking dinner.",
+      "explanation": "Usually показывает привычку, right now — процесс. Сначала найди временной ориентир и реши: факт, процесс, уже готовый результат или длительность. После этого строй вспомогательный и смысловой глаголы.\nПОЛНОЕ ПРАВИЛЬНОЕ ПРЕДЛОЖЕНИЕ: I usually cook dinner in the evenings.\nRight now I am cooking dinner.\nПЕРЕВОД: Обычно по вечерам я готовлю ужин. / Прямо сейчас я готовлю ужин.\nСРАВНЕНИЕ: I usually cook dinner in the evenings. — Обычно по вечерам я готовлю ужин. / Right now I am cooking dinner. — Прямо сейчас я готовлю ужин.",
+      "wrongParts": [],
+      "fullSentence": "I usually cook dinner in the evenings.\nRight now I am cooking dinner.",
+      "translation": "Обычно по вечерам я готовлю ужин. / Прямо сейчас я готовлю ужин.",
+      "examples": [
+        {
+          "en": "I usually cook dinner in the evenings.",
+          "ru": "Обычно по вечерам я готовлю ужин."
+        },
+        {
+          "en": "Right now I am cooking dinner.",
+          "ru": "Прямо сейчас я готовлю ужин."
+        }
+      ]
+    },
+    {
+      "id": "all-062",
+      "group": "contrast",
+      "prompt": "Готовый результат против незаконченной длительной работы. Ситуация 1: «Я уже написала письмо; задача завершена.» Ситуация 2: «Я уже несколько часов пишу письмо и продолжаю.» Сопоставь оба предложения: выбирай формы строго для этих ДВУХ смыслов. Другой грамматически возможный смысл здесь не подразумевается.",
+      "correct": true,
+      "chosen": "I have written a letter already, and the task is complete.\nI have been writing a letter for hours, and I am still working.",
+      "expected": "I have written a letter already, and the task is complete.\nI have been writing a letter for hours, and I am still working.",
+      "explanation": "Perfect — завершённый результат; Perfect Continuous — длительность, процесс может продолжаться. Сначала найди временной ориентир и реши: факт, процесс, уже готовый результат или длительность. После этого строй вспомогательный и смысловой глаголы.\nПОЛНОЕ ПРАВИЛЬНОЕ ПРЕДЛОЖЕНИЕ: I have written a letter already, and the task is complete.\nI have been writing a letter for hours, and I am still working.\nПЕРЕВОД: Я уже написала письмо; задача завершена. / Я уже несколько часов пишу письмо и продолжаю.\nСРАВНЕНИЕ: I have written a letter already, and the task is complete. — Я уже написала письмо; задача завершена. / I have been writing a letter for hours, and I am still working. — Я уже несколько часов пишу письмо и продолжаю.",
+      "wrongParts": [],
+      "fullSentence": "I have written a letter already, and the task is complete.\nI have been writing a letter for hours, and I am still working.",
+      "translation": "Я уже написала письмо; задача завершена. / Я уже несколько часов пишу письмо и продолжаю.",
+      "examples": [
+        {
+          "en": "I have written a letter already, and the task is complete.",
+          "ru": "Я уже написала письмо; задача завершена."
+        },
+        {
+          "en": "I have been writing a letter for hours, and I am still working.",
+          "ru": "Я уже несколько часов пишу письмо и продолжаю."
+        }
+      ]
+    },
+    {
+      "id": "all-091",
+      "group": "contrast",
+      "prompt": "Реальное условие после if против самостоятельного обещания. Ситуация 1: «Если завтра я буду читать книгу, то пришлю фото.» Ситуация 2: «Завтра я буду читать книгу. Обещаю.» Сопоставь оба предложения: выбирай формы строго для этих ДВУХ смыслов. Другой грамматически возможный смысл здесь не подразумевается.",
+      "correct": true,
+      "chosen": "If I read a book tomorrow, I will send you a photo.\nI will read a book tomorrow. I promise.",
+      "expected": "If I read a book tomorrow, I will send you a photo.\nI will read a book tomorrow. I promise.",
+      "explanation": "В придаточном реального условия после if — Present Simple; в главной части с обещанием — will. Сначала найди временной ориентир и реши: факт, процесс, уже готовый результат или длительность. После этого строй вспомогательный и смысловой глаголы.\nПОЛНОЕ ПРАВИЛЬНОЕ ПРЕДЛОЖЕНИЕ: If I read a book tomorrow, I will send you a photo.\nI will read a book tomorrow. I promise.\nПЕРЕВОД: Если завтра я буду читать книгу, то пришлю фото. / Завтра я буду читать книгу. Обещаю.\nСРАВНЕНИЕ: If I read a book tomorrow, I will send you a photo. — Если завтра я буду читать книгу, то пришлю фото. / I will read a book tomorrow. I promise. — Завтра я буду читать книгу. Обещаю.",
+      "wrongParts": [],
+      "fullSentence": "If I read a book tomorrow, I will send you a photo.\nI will read a book tomorrow. I promise.",
+      "translation": "Если завтра я буду читать книгу, то пришлю фото. / Завтра я буду читать книгу. Обещаю.",
+      "examples": [
+        {
+          "en": "If I read a book tomorrow, I will send you a photo.",
+          "ru": "Если завтра я буду читать книгу, то пришлю фото."
+        },
+        {
+          "en": "I will read a book tomorrow. I promise.",
+          "ru": "Завтра я буду читать книгу. Обещаю."
+        }
+      ]
+    },
+    {
+      "id": "all-050",
+      "group": "contrast",
+      "prompt": "Длительность до звонка против действия во время звонка. Ситуация 1: «Когда зазвонил телефон, я уже целый час рисовала картину.» Ситуация 2: «Во время звонка я рисовала картину.» Сопоставь оба предложения: выбирай формы строго для этих ДВУХ смыслов. Другой грамматически возможный смысл здесь не подразумевается.",
+      "correct": false,
+      "chosen": "When the phone rang, I have been painting a picture for an hour already.\nWhen the phone rang, I was painting a picture right then.",
+      "expected": "When the phone rang, I had been painting a picture for an hour already.\nWhen the phone rang, I was painting a picture right then.",
+      "explanation": "Past Perfect Continuous — как долго до звонка, Past Continuous — что происходило тогда. Сначала найди временной ориентир и реши: факт, процесс, уже готовый результат или длительность. После этого строй вспомогательный и смысловой глаголы.\nПОЛНОЕ ПРАВИЛЬНОЕ ПРЕДЛОЖЕНИЕ: When the phone rang, I had been painting a picture for an hour already.\nWhen the phone rang, I was painting a picture right then.\nПЕРЕВОД: Когда зазвонил телефон, я уже целый час рисовала картину. / Во время звонка я рисовала картину.\nСРАВНЕНИЕ: When the phone rang, I had been painting a picture for an hour already. — Когда зазвонил телефон, я уже целый час рисовала картину. / When the phone rang, I was painting a picture right then. — Во время звонка я рисовала картину.",
+      "wrongParts": [
+        {
+          "chosen": "have been painting",
+          "expected": "had been painting",
+          "why": "Past Perfect Continuous — как долго до звонка, Past Continuous — что происходило тогда."
+        }
+      ],
+      "fullSentence": "When the phone rang, I had been painting a picture for an hour already.\nWhen the phone rang, I was painting a picture right then.",
+      "translation": "Когда зазвонил телефон, я уже целый час рисовала картину. / Во время звонка я рисовала картину.",
+      "examples": [
+        {
+          "en": "When the phone rang, I had been painting a picture for an hour already.",
+          "ru": "Когда зазвонил телефон, я уже целый час рисовала картину."
+        },
+        {
+          "en": "When the phone rang, I was painting a picture right then.",
+          "ru": "Во время звонка я рисовала картину."
+        }
+      ]
+    },
+    {
+      "id": "all-069",
+      "group": "contrast",
+      "prompt": "Законченное вчера двухчасовое действие против процесса, вызвавшего усталость. Ситуация 1: «Вчера я два часа готовила ужин и закончила.» Ситуация 2: «Я была измучена, потому что до этого часами готовила ужин.» Сопоставь оба предложения: выбирай формы строго для этих ДВУХ смыслов. Другой грамматически возможный смысл здесь не подразумевается.",
+      "correct": false,
+      "chosen": "Yesterday I am cooking dinner for two hours and then stopped.\nI was exhausted because I had been cooking dinner for hours beforehand.",
+      "expected": "Yesterday I cooked dinner for two hours and then stopped.\nI was exhausted because I had been cooking dinner for hours beforehand.",
+      "explanation": "Past Simple сообщает о прошлом факте; Past Perfect Continuous объясняет состояние более ранним процессом. Сначала найди временной ориентир и реши: факт, процесс, уже готовый результат или длительность. После этого строй вспомогательный и смысловой глаголы.\nПОЛНОЕ ПРАВИЛЬНОЕ ПРЕДЛОЖЕНИЕ: Yesterday I cooked dinner for two hours and then stopped.\nI was exhausted because I had been cooking dinner for hours beforehand.\nПЕРЕВОД: Вчера я два часа готовила ужин и закончила. / Я была измучена, потому что до этого часами готовила ужин.\nСРАВНЕНИЕ: Yesterday I cooked dinner for two hours and then stopped. — Вчера я два часа готовила ужин и закончила. / I was exhausted because I had been cooking dinner for hours beforehand. — Я была измучена, потому что до этого часами готовила ужин.",
+      "wrongParts": [
+        {
+          "chosen": "am cooking",
+          "expected": "cooked",
+          "why": "Past Simple сообщает о прошлом факте; Past Perfect Continuous объясняет состояние более ранним процессом."
+        }
+      ],
+      "fullSentence": "Yesterday I cooked dinner for two hours and then stopped.\nI was exhausted because I had been cooking dinner for hours beforehand.",
+      "translation": "Вчера я два часа готовила ужин и закончила. / Я была измучена, потому что до этого часами готовила ужин.",
+      "examples": [
+        {
+          "en": "Yesterday I cooked dinner for two hours and then stopped.",
+          "ru": "Вчера я два часа готовила ужин и закончила."
+        },
+        {
+          "en": "I was exhausted because I had been cooking dinner for hours beforehand.",
+          "ru": "Я была измучена, потому что до этого часами готовила ужин."
+        }
+      ]
+    },
+    {
+      "id": "all-034",
+      "group": "contrast",
+      "prompt": "В восемь процесс против готовности к восьми. Ситуация 1: «Завтра в восемь я буду готовить ужин (процесс).» Ситуация 2: «К восьми завтра я уже закончу готовить ужин.» Сопоставь оба предложения: выбирай формы строго для этих ДВУХ смыслов. Другой грамматически возможный смысл здесь не подразумевается.",
+      "correct": true,
+      "chosen": "At eight tomorrow, I will be cooking dinner; I will be busy.\nBy eight tomorrow, I will have cooked dinner already.",
+      "expected": "At eight tomorrow, I will be cooking dinner; I will be busy.\nBy eight tomorrow, I will have cooked dinner already.",
+      "explanation": "At eight — что происходит в момент; by eight — что уже будет готово к сроку. Сначала найди временной ориентир и реши: факт, процесс, уже готовый результат или длительность. После этого строй вспомогательный и смысловой глаголы.\nПОЛНОЕ ПРАВИЛЬНОЕ ПРЕДЛОЖЕНИЕ: At eight tomorrow, I will be cooking dinner; I will be busy.\nBy eight tomorrow, I will have cooked dinner already.\nПЕРЕВОД: Завтра в восемь я буду готовить ужин (процесс). / К восьми завтра я уже закончу готовить ужин.\nСРАВНЕНИЕ: At eight tomorrow, I will be cooking dinner; I will be busy. — Завтра в восемь я буду готовить ужин (процесс). / By eight tomorrow, I will have cooked dinner already. — К восьми завтра я уже закончу готовить ужин.",
+      "wrongParts": [],
+      "fullSentence": "At eight tomorrow, I will be cooking dinner; I will be busy.\nBy eight tomorrow, I will have cooked dinner already.",
+      "translation": "Завтра в восемь я буду готовить ужин (процесс). / К восьми завтра я уже закончу готовить ужин.",
+      "examples": [
+        {
+          "en": "At eight tomorrow, I will be cooking dinner; I will be busy.",
+          "ru": "Завтра в восемь я буду готовить ужин (процесс)."
+        },
+        {
+          "en": "By eight tomorrow, I will have cooked dinner already.",
+          "ru": "К восьми завтра я уже закончу готовить ужин."
+        }
+      ]
+    },
+    {
+      "id": "all-027",
+      "group": "contrast",
+      "prompt": "Решение сейчас против намерения, принятого заранее. Ситуация 1: «Ладно, завтра я буду писать письмо! Только что решила.» Ситуация 2: «Завтра я собираюсь писать письмо. Я запланировала это на прошлой неделе.» Сопоставь оба предложения: выбирай формы строго для этих ДВУХ смыслов. Другой грамматически возможный смысл здесь не подразумевается.",
+      "correct": true,
+      "chosen": "All right, I will write a letter tomorrow! I have just decided.\nI am going to write a letter tomorrow. I planned it last week.",
+      "expected": "All right, I will write a letter tomorrow! I have just decided.\nI am going to write a letter tomorrow. I planned it last week.",
+      "explanation": "Will помогает выразить решение в момент разговора, going to — заранее существующий план. Сначала найди временной ориентир и реши: факт, процесс, уже готовый результат или длительность. После этого строй вспомогательный и смысловой глаголы.\nПОЛНОЕ ПРАВИЛЬНОЕ ПРЕДЛОЖЕНИЕ: All right, I will write a letter tomorrow! I have just decided.\nI am going to write a letter tomorrow. I planned it last week.\nПЕРЕВОД: Ладно, завтра я буду писать письмо! Только что решила. / Завтра я собираюсь писать письмо. Я запланировала это на прошлой неделе.\nСРАВНЕНИЕ: All right, I will write a letter tomorrow! I have just decided. — Ладно, завтра я буду писать письмо! Только что решила. / I am going to write a letter tomorrow. I planned it last week. — Завтра я собираюсь писать письмо. Я запланировала это на прошлой неделе.",
+      "wrongParts": [],
+      "fullSentence": "All right, I will write a letter tomorrow! I have just decided.\nI am going to write a letter tomorrow. I planned it last week.",
+      "translation": "Ладно, завтра я буду писать письмо! Только что решила. / Завтра я собираюсь писать письмо. Я запланировала это на прошлой неделе.",
+      "examples": [
+        {
+          "en": "All right, I will write a letter tomorrow! I have just decided.",
+          "ru": "Ладно, завтра я буду писать письмо! Только что решила."
+        },
+        {
+          "en": "I am going to write a letter tomorrow. I planned it last week.",
+          "ru": "Завтра я собираюсь писать письмо. Я запланировала это на прошлой неделе."
+        }
+      ]
+    },
+    {
+      "id": "all-098",
+      "group": "contrast",
+      "prompt": "Сегодня ещё продолжается против законченного вчера. Ситуация 1: «Сегодня я уже убрала комнату (результат готов сейчас).» Ситуация 2: «Вчера я убрала комнату (законченное дело вчера).» Сопоставь оба предложения: выбирай формы строго для этих ДВУХ смыслов. Другой грамматически возможный смысл здесь не подразумевается.",
+      "correct": true,
+      "chosen": "So far today, I have cleaned the room. The result is ready for me now.\nYesterday, I cleaned the room and completed that task before the end of the day.",
+      "expected": "So far today, I have cleaned the room. The result is ready for me now.\nYesterday, I cleaned the room and completed that task before the end of the day.",
+      "explanation": "So far today — незавершённый период с результатом сейчас; yesterday — завершённый прошлый период. Сначала найди временной ориентир и реши: факт, процесс, уже готовый результат или длительность. После этого строй вспомогательный и смысловой глаголы.\nПОЛНОЕ ПРАВИЛЬНОЕ ПРЕДЛОЖЕНИЕ: So far today, I have cleaned the room. The result is ready for me now.\nYesterday, I cleaned the room and completed that task before the end of the day.\nПЕРЕВОД: Сегодня я уже убрала комнату (результат готов сейчас). / Вчера я убрала комнату (законченное дело вчера).\nСРАВНЕНИЕ: So far today, I have cleaned the room. The result is ready for me now. — Сегодня я уже убрала комнату (результат готов сейчас). / Yesterday, I cleaned the room and completed that task before the end of the day. — Вчера я убрала комнату (законченное дело вчера).",
+      "wrongParts": [],
+      "fullSentence": "So far today, I have cleaned the room. The result is ready for me now.\nYesterday, I cleaned the room and completed that task before the end of the day.",
+      "translation": "Сегодня я уже убрала комнату (результат готов сейчас). / Вчера я убрала комнату (законченное дело вчера).",
+      "examples": [
+        {
+          "en": "So far today, I have cleaned the room. The result is ready for me now.",
+          "ru": "Сегодня я уже убрала комнату (результат готов сейчас)."
+        },
+        {
+          "en": "Yesterday, I cleaned the room and completed that task before the end of the day.",
+          "ru": "Вчера я убрала комнату (законченное дело вчера)."
+        }
+      ]
+    },
+    {
+      "id": "all-004",
+      "group": "contrast",
+      "prompt": "Конкретная дата против результата сейчас. Ситуация 1: «Вчера я приготовила ужин (закончила дело, не просто была занята процессом).» Ситуация 2: «Я уже приготовила ужин и теперь могу отдохнуть.» Сопоставь оба предложения: выбирай формы строго для этих ДВУХ смыслов. Другой грамматически возможный смысл здесь не подразумевается.",
+      "correct": true,
+      "chosen": "Yesterday I cooked dinner. I completed that task yesterday and it is no longer on my to-do list.\nI have cooked dinner already, so I can rest.",
+      "expected": "Yesterday I cooked dinner. I completed that task yesterday and it is no longer on my to-do list.\nI have cooked dinner already, so I can rest.",
+      "explanation": "Вчера (Past Simple) — закрытое прошлое; already с результатом сейчас — Present Perfect. Сначала найди временной ориентир и реши: факт, процесс, уже готовый результат или длительность. После этого строй вспомогательный и смысловой глаголы.\nПОЛНОЕ ПРАВИЛЬНОЕ ПРЕДЛОЖЕНИЕ: Yesterday I cooked dinner. I completed that task yesterday and it is no longer on my to-do list.\nI have cooked dinner already, so I can rest.\nПЕРЕВОД: Вчера я приготовила ужин (закончила дело, не просто была занята процессом). / Я уже приготовила ужин и теперь могу отдохнуть.\nСРАВНЕНИЕ: Yesterday I cooked dinner. I completed that task yesterday and it is no longer on my to-do list. — Вчера я приготовила ужин (закончила дело, не просто была занята процессом). / I have cooked dinner already, so I can rest. — Я уже приготовила ужин и теперь могу отдохнуть.",
+      "wrongParts": [],
+      "fullSentence": "Yesterday I cooked dinner. I completed that task yesterday and it is no longer on my to-do list.\nI have cooked dinner already, so I can rest.",
+      "translation": "Вчера я приготовила ужин (закончила дело, не просто была занята процессом). / Я уже приготовила ужин и теперь могу отдохнуть.",
+      "examples": [
+        {
+          "en": "Yesterday I cooked dinner. I completed that task yesterday and it is no longer on my to-do list.",
+          "ru": "Вчера я приготовила ужин (закончила дело, не просто была занята процессом)."
+        },
+        {
+          "en": "I have cooked dinner already, so I can rest.",
+          "ru": "Я уже приготовила ужин и теперь могу отдохнуть."
+        }
+      ]
+    },
+    {
+      "id": "all-073",
+      "group": "contrast",
+      "prompt": "Расписание привычек против принятого решения на эту среду. Ситуация 1: «По постоянному расписанию я занимаюсь тем, чтобы убирать комнату, по средам.» Ситуация 2: «В эту среду я собираюсь убирать комнату. Решила вчера.» Сопоставь оба предложения: выбирай формы строго для этих ДВУХ смыслов. Другой грамматически возможный смысл здесь не подразумевается.",
+      "correct": true,
+      "chosen": "According to my regular schedule, I clean the room on Wednesdays.\nI am going to clean the room this Wednesday. I decided yesterday.",
+      "expected": "According to my regular schedule, I clean the room on Wednesdays.\nI am going to clean the room this Wednesday. I decided yesterday.",
+      "explanation": "Повторение по расписанию отличается от конкретного намерения на эту среду. Сначала найди временной ориентир и реши: факт, процесс, уже готовый результат или длительность. После этого строй вспомогательный и смысловой глаголы.\nПОЛНОЕ ПРАВИЛЬНОЕ ПРЕДЛОЖЕНИЕ: According to my regular schedule, I clean the room on Wednesdays.\nI am going to clean the room this Wednesday. I decided yesterday.\nПЕРЕВОД: По постоянному расписанию я занимаюсь тем, чтобы убирать комнату, по средам. / В эту среду я собираюсь убирать комнату. Решила вчера.\nСРАВНЕНИЕ: According to my regular schedule, I clean the room on Wednesdays. — По постоянному расписанию я занимаюсь тем, чтобы убирать комнату, по средам. / I am going to clean the room this Wednesday. I decided yesterday. — В эту среду я собираюсь убирать комнату. Решила вчера.",
+      "wrongParts": [],
+      "fullSentence": "According to my regular schedule, I clean the room on Wednesdays.\nI am going to clean the room this Wednesday. I decided yesterday.",
+      "translation": "По постоянному расписанию я занимаюсь тем, чтобы убирать комнату, по средам. / В эту среду я собираюсь убирать комнату. Решила вчера.",
+      "examples": [
+        {
+          "en": "According to my regular schedule, I clean the room on Wednesdays.",
+          "ru": "По постоянному расписанию я занимаюсь тем, чтобы убирать комнату, по средам."
+        },
+        {
+          "en": "I am going to clean the room this Wednesday. I decided yesterday.",
+          "ru": "В эту среду я собираюсь убирать комнату. Решила вчера."
+        }
+      ]
+    },
+    {
+      "id": "all-053",
+      "group": "contrast",
+      "prompt": "Результат до встречи вчера против результата сейчас. Ситуация 1: «К нашей вчерашней встрече я уже убрала комнату.» Ситуация 2: «Недавно я убрала комнату — результат есть сейчас.» Сопоставь оба предложения: выбирай формы строго для этих ДВУХ смыслов. Другой грамматически возможный смысл здесь не подразумевается.",
+      "correct": true,
+      "chosen": "By the time we met yesterday, I had cleaned the room.\nI have cleaned the room recently; the result is here now.",
+      "expected": "By the time we met yesterday, I had cleaned the room.\nI have cleaned the room recently; the result is here now.",
+      "explanation": "Past Perfect смотрит назад из прошлого; Present Perfect связывает прошлое с настоящим. Сначала найди временной ориентир и реши: факт, процесс, уже готовый результат или длительность. После этого строй вспомогательный и смысловой глаголы.\nПОЛНОЕ ПРАВИЛЬНОЕ ПРЕДЛОЖЕНИЕ: By the time we met yesterday, I had cleaned the room.\nI have cleaned the room recently; the result is here now.\nПЕРЕВОД: К нашей вчерашней встрече я уже убрала комнату. / Недавно я убрала комнату — результат есть сейчас.\nСРАВНЕНИЕ: By the time we met yesterday, I had cleaned the room. — К нашей вчерашней встрече я уже убрала комнату. / I have cleaned the room recently; the result is here now. — Недавно я убрала комнату — результат есть сейчас.",
+      "wrongParts": [],
+      "fullSentence": "By the time we met yesterday, I had cleaned the room.\nI have cleaned the room recently; the result is here now.",
+      "translation": "К нашей вчерашней встрече я уже убрала комнату. / Недавно я убрала комнату — результат есть сейчас.",
+      "examples": [
+        {
+          "en": "By the time we met yesterday, I had cleaned the room.",
+          "ru": "К нашей вчерашней встрече я уже убрала комнату."
+        },
+        {
+          "en": "I have cleaned the room recently; the result is here now.",
+          "ru": "Недавно я убрала комнату — результат есть сейчас."
+        }
+      ]
+    },
+    {
+      "id": "all-060",
+      "group": "contrast",
+      "prompt": "Уже два часа идущее действие против происходящего прямо сейчас. Ситуация 1: «Я рисую картину уже два часа и всё ещё занята.» Ситуация 2: «Смотри, сейчас я рисую картину.» Сопоставь оба предложения: выбирай формы строго для этих ДВУХ смыслов. Другой грамматически возможный смысл здесь не подразумевается.",
+      "correct": true,
+      "chosen": "I have been painting a picture for two hours, and I am still busy.\nLook, I am painting a picture now.",
+      "expected": "I have been painting a picture for two hours, and I am still busy.\nLook, I am painting a picture now.",
+      "explanation": "Perfect Continuous измеряет длительность до сейчас; обычный Continuous показывает текущий процесс. Сначала найди временной ориентир и реши: факт, процесс, уже готовый результат или длительность. После этого строй вспомогательный и смысловой глаголы.\nПОЛНОЕ ПРАВИЛЬНОЕ ПРЕДЛОЖЕНИЕ: I have been painting a picture for two hours, and I am still busy.\nLook, I am painting a picture now.\nПЕРЕВОД: Я рисую картину уже два часа и всё ещё занята. / Смотри, сейчас я рисую картину.\nСРАВНЕНИЕ: I have been painting a picture for two hours, and I am still busy. — Я рисую картину уже два часа и всё ещё занята. / Look, I am painting a picture now. — Смотри, сейчас я рисую картину.",
+      "wrongParts": [],
+      "fullSentence": "I have been painting a picture for two hours, and I am still busy.\nLook, I am painting a picture now.",
+      "translation": "Я рисую картину уже два часа и всё ещё занята. / Смотри, сейчас я рисую картину.",
+      "examples": [
+        {
+          "en": "I have been painting a picture for two hours, and I am still busy.",
+          "ru": "Я рисую картину уже два часа и всё ещё занята."
+        },
+        {
+          "en": "Look, I am painting a picture now.",
+          "ru": "Смотри, сейчас я рисую картину."
+        }
+      ]
+    },
+    {
+      "id": "all-009",
+      "group": "contrast",
+      "prompt": "Процесс вчера в восемь против законченного дела вчера. Ситуация 1: «Вчера в восемь я готовила ужин (дело ещё НЕ было закончено).» Ситуация 2: «Вчера я приготовила ужин (полностью закончила) и потом отдохнула.» Сопоставь оба предложения: выбирай формы строго для этих ДВУХ смыслов. Другой грамматически возможный смысл здесь не подразумевается.",
+      "correct": true,
+      "chosen": "At eight yesterday, I was cooking dinner; I was still in the middle of this task.\nYesterday I cooked dinner and finished the task before I rested.",
+      "expected": "At eight yesterday, I was cooking dinner; I was still in the middle of this task.\nYesterday I cooked dinner and finished the task before I rested.",
+      "explanation": "В конкретный момент прошлое действие шло; во второй фразе оно закончилось. Сначала найди временной ориентир и реши: факт, процесс, уже готовый результат или длительность. После этого строй вспомогательный и смысловой глаголы.\nПОЛНОЕ ПРАВИЛЬНОЕ ПРЕДЛОЖЕНИЕ: At eight yesterday, I was cooking dinner; I was still in the middle of this task.\nYesterday I cooked dinner and finished the task before I rested.\nПЕРЕВОД: Вчера в восемь я готовила ужин (дело ещё НЕ было закончено). / Вчера я приготовила ужин (полностью закончила) и потом отдохнула.\nСРАВНЕНИЕ: At eight yesterday, I was cooking dinner; I was still in the middle of this task. — Вчера в восемь я готовила ужин (дело ещё НЕ было закончено). / Yesterday I cooked dinner and finished the task before I rested. — Вчера я приготовила ужин (полностью закончила) и потом отдохнула.",
+      "wrongParts": [],
+      "fullSentence": "At eight yesterday, I was cooking dinner; I was still in the middle of this task.\nYesterday I cooked dinner and finished the task before I rested.",
+      "translation": "Вчера в восемь я готовила ужин (дело ещё НЕ было закончено). / Вчера я приготовила ужин (полностью закончила) и потом отдохнула.",
+      "examples": [
+        {
+          "en": "At eight yesterday, I was cooking dinner; I was still in the middle of this task.",
+          "ru": "Вчера в восемь я готовила ужин (дело ещё НЕ было закончено)."
+        },
+        {
+          "en": "Yesterday I cooked dinner and finished the task before I rested.",
+          "ru": "Вчера я приготовила ужин (полностью закончила) и потом отдохнула."
+        }
+      ]
+    },
+    {
+      "id": "all-079",
+      "group": "contrast",
+      "prompt": "Бывшая привычка против нынешней. Ситуация 1: «Когда я была моложе, я часто готовила ужин.» Ситуация 2: «В наши дни я обычно готовлю ужин.» Сопоставь оба предложения: выбирай формы строго для этих ДВУХ смыслов. Другой грамматически возможный смысл здесь не подразумевается.",
+      "correct": true,
+      "chosen": "When I was younger, I often cooked dinner.\nThese days, I usually cook dinner.",
+      "expected": "When I was younger, I often cooked dinner.\nThese days, I usually cook dinner.",
+      "explanation": "Закончившийся прошлый период требует Past Simple, текущая привычка — Present Simple. Сначала найди временной ориентир и реши: факт, процесс, уже готовый результат или длительность. После этого строй вспомогательный и смысловой глаголы.\nПОЛНОЕ ПРАВИЛЬНОЕ ПРЕДЛОЖЕНИЕ: When I was younger, I often cooked dinner.\nThese days, I usually cook dinner.\nПЕРЕВОД: Когда я была моложе, я часто готовила ужин. / В наши дни я обычно готовлю ужин.\nСРАВНЕНИЕ: When I was younger, I often cooked dinner. — Когда я была моложе, я часто готовила ужин. / These days, I usually cook dinner. — В наши дни я обычно готовлю ужин.",
+      "wrongParts": [],
+      "fullSentence": "When I was younger, I often cooked dinner.\nThese days, I usually cook dinner.",
+      "translation": "Когда я была моложе, я часто готовила ужин. / В наши дни я обычно готовлю ужин.",
+      "examples": [
+        {
+          "en": "When I was younger, I often cooked dinner.",
+          "ru": "Когда я была моложе, я часто готовила ужин."
+        },
+        {
+          "en": "These days, I usually cook dinner.",
+          "ru": "В наши дни я обычно готовлю ужин."
+        }
+      ]
+    },
+    {
+      "id": "all-040",
+      "group": "contrast",
+      "prompt": "К пятнице результат против действия в пятницу. Ситуация 1: «К пятнице я уже закончу рисовать картину.» Ситуация 2: «В пятницу я буду рисовать картину.» Сопоставь оба предложения: выбирай формы строго для этих ДВУХ смыслов. Другой грамматически возможный смысл здесь не подразумевается.",
+      "correct": false,
+      "chosen": "By Friday, I was painting a picture already.\nOn Friday, I will paint a picture.",
+      "expected": "By Friday, I will have painted a picture already.\nOn Friday, I will paint a picture.",
+      "explanation": "Будущий срок готовности by отличается от календарного дня on. Сначала найди временной ориентир и реши: факт, процесс, уже готовый результат или длительность. После этого строй вспомогательный и смысловой глаголы.\nПОЛНОЕ ПРАВИЛЬНОЕ ПРЕДЛОЖЕНИЕ: By Friday, I will have painted a picture already.\nOn Friday, I will paint a picture.\nПЕРЕВОД: К пятнице я уже закончу рисовать картину. / В пятницу я буду рисовать картину.\nСРАВНЕНИЕ: By Friday, I will have painted a picture already. — К пятнице я уже закончу рисовать картину. / On Friday, I will paint a picture. — В пятницу я буду рисовать картину.",
+      "wrongParts": [
+        {
+          "chosen": "was painting",
+          "expected": "will have painted",
+          "why": "Будущий срок готовности by отличается от календарного дня on."
+        }
+      ],
+      "fullSentence": "By Friday, I will have painted a picture already.\nOn Friday, I will paint a picture.",
+      "translation": "К пятнице я уже закончу рисовать картину. / В пятницу я буду рисовать картину.",
+      "examples": [
+        {
+          "en": "By Friday, I will have painted a picture already.",
+          "ru": "К пятнице я уже закончу рисовать картину."
+        },
+        {
+          "en": "On Friday, I will paint a picture.",
+          "ru": "В пятницу я буду рисовать картину."
+        }
+      ]
+    },
+    {
+      "id": "all-088",
+      "group": "contrast",
+      "prompt": "Будущее после when: в придаточном нет will. Ситуация 1: «Когда завтра я займусь тем, чтобы убирать комнату, то расскажу тебе об этом.» Ситуация 2: «Завтра я буду убирать комнату — я так решила.» Сопоставь оба предложения: выбирай формы строго для этих ДВУХ смыслов. Другой грамматически возможный смысл здесь не подразумевается.",
+      "correct": false,
+      "chosen": "When I clean the room tomorrow, I will tell you about it.\nI clean the room tomorrow; that is my decision.",
+      "expected": "When I clean the room tomorrow, I will tell you about it.\nI will clean the room tomorrow; that is my decision.",
+      "explanation": "В придаточном времени after when используется Present Simple, даже если русское предложение о будущем. Сначала найди временной ориентир и реши: факт, процесс, уже готовый результат или длительность. После этого строй вспомогательный и смысловой глаголы.\nПОЛНОЕ ПРАВИЛЬНОЕ ПРЕДЛОЖЕНИЕ: When I clean the room tomorrow, I will tell you about it.\nI will clean the room tomorrow; that is my decision.\nПЕРЕВОД: Когда завтра я займусь тем, чтобы убирать комнату, то расскажу тебе об этом. / Завтра я буду убирать комнату — я так решила.\nСРАВНЕНИЕ: When I clean the room tomorrow, I will tell you about it. — Когда завтра я займусь тем, чтобы убирать комнату, то расскажу тебе об этом. / I will clean the room tomorrow; that is my decision. — Завтра я буду убирать комнату — я так решила.",
+      "wrongParts": [
+        {
+          "chosen": "clean",
+          "expected": "will clean",
+          "why": "В придаточном времени after when используется Present Simple, даже если русское предложение о будущем."
+        }
+      ],
+      "fullSentence": "When I clean the room tomorrow, I will tell you about it.\nI will clean the room tomorrow; that is my decision.",
+      "translation": "Когда завтра я займусь тем, чтобы убирать комнату, то расскажу тебе об этом. / Завтра я буду убирать комнату — я так решила.",
+      "examples": [
+        {
+          "en": "When I clean the room tomorrow, I will tell you about it.",
+          "ru": "Когда завтра я займусь тем, чтобы убирать комнату, то расскажу тебе об этом."
+        },
+        {
+          "en": "I will clean the room tomorrow; that is my decision.",
+          "ru": "Завтра я буду убирать комнату — я так решила."
+        }
+      ]
+    },
+    {
+      "id": "all-012",
+      "group": "contrast",
+      "prompt": "Сделала до прихода против после прихода. Ситуация 1: «К приходу Анны я уже написала письмо (завершила до её прихода).» Ситуация 2: «После прихода Анны я написала письмо (начала после её прихода и закончила).» Сопоставь оба предложения: выбирай формы строго для этих ДВУХ смыслов. Другой грамматически возможный смысл здесь не подразумевается.",
+      "correct": true,
+      "chosen": "By the time Anna arrived yesterday, I had written a letter already. The whole task was finished before her arrival.\nAfter Anna arrived, I wrote a letter and completed the whole task that evening.",
+      "expected": "By the time Anna arrived yesterday, I had written a letter already. The whole task was finished before her arrival.\nAfter Anna arrived, I wrote a letter and completed the whole task that evening.",
+      "explanation": "Had + V3 — раньше другого прошлого. Past Simple — действие после него. Сначала найди временной ориентир и реши: факт, процесс, уже готовый результат или длительность. После этого строй вспомогательный и смысловой глаголы.\nПОЛНОЕ ПРАВИЛЬНОЕ ПРЕДЛОЖЕНИЕ: By the time Anna arrived yesterday, I had written a letter already. The whole task was finished before her arrival.\nAfter Anna arrived, I wrote a letter and completed the whole task that evening.\nПЕРЕВОД: К приходу Анны я уже написала письмо (завершила до её прихода). / После прихода Анны я написала письмо (начала после её прихода и закончила).\nСРАВНЕНИЕ: By the time Anna arrived yesterday, I had written a letter already. The whole task was finished before her arrival. — К приходу Анны я уже написала письмо (завершила до её прихода). / After Anna arrived, I wrote a letter and completed the whole task that evening. — После прихода Анны я написала письмо (начала после её прихода и закончила).",
+      "wrongParts": [],
+      "fullSentence": "By the time Anna arrived yesterday, I had written a letter already. The whole task was finished before her arrival.\nAfter Anna arrived, I wrote a letter and completed the whole task that evening.",
+      "translation": "К приходу Анны я уже написала письмо (завершила до её прихода). / После прихода Анны я написала письмо (начала после её прихода и закончила).",
+      "examples": [
+        {
+          "en": "By the time Anna arrived yesterday, I had written a letter already. The whole task was finished before her arrival.",
+          "ru": "К приходу Анны я уже написала письмо (завершила до её прихода)."
+        },
+        {
+          "en": "After Anna arrived, I wrote a letter and completed the whole task that evening.",
+          "ru": "После прихода Анны я написала письмо (начала после её прихода и закончила)."
+        }
+      ]
+    },
+    {
+      "id": "all-024",
+      "group": "contrast",
+      "prompt": "Временная деятельность на этой неделе против обычной привычки. Ситуация 1: «На этой неделе я временно готовлю ужин каждый вечер.» Ситуация 2: «Обычно в выходные я готовлю ужин.» Сопоставь оба предложения: выбирай формы строго для этих ДВУХ смыслов. Другой грамматически возможный смысл здесь не подразумевается.",
+      "correct": false,
+      "chosen": "This week I cooked dinner every evening as a temporary project.\nNormally I cook dinner on weekends.",
+      "expected": "This week I am cooking dinner every evening as a temporary project.\nNormally I cook dinner on weekends.",
+      "explanation": "Present Continuous может описывать временную ситуацию, а Present Simple — обычный уклад. Сначала найди временной ориентир и реши: факт, процесс, уже готовый результат или длительность. После этого строй вспомогательный и смысловой глаголы.\nПОЛНОЕ ПРАВИЛЬНОЕ ПРЕДЛОЖЕНИЕ: This week I am cooking dinner every evening as a temporary project.\nNormally I cook dinner on weekends.\nПЕРЕВОД: На этой неделе я временно готовлю ужин каждый вечер. / Обычно в выходные я готовлю ужин.\nСРАВНЕНИЕ: This week I am cooking dinner every evening as a temporary project. — На этой неделе я временно готовлю ужин каждый вечер. / Normally I cook dinner on weekends. — Обычно в выходные я готовлю ужин.",
+      "wrongParts": [
+        {
+          "chosen": "cooked",
+          "expected": "am cooking",
+          "why": "Present Continuous может описывать временную ситуацию, а Present Simple — обычный уклад."
+        }
+      ],
+      "fullSentence": "This week I am cooking dinner every evening as a temporary project.\nNormally I cook dinner on weekends.",
+      "translation": "На этой неделе я временно готовлю ужин каждый вечер. / Обычно в выходные я готовлю ужин.",
+      "examples": [
+        {
+          "en": "This week I am cooking dinner every evening as a temporary project.",
+          "ru": "На этой неделе я временно готовлю ужин каждый вечер."
+        },
+        {
+          "en": "Normally I cook dinner on weekends.",
+          "ru": "Обычно в выходные я готовлю ужин."
+        }
+      ]
+    }
+  ]
+}
